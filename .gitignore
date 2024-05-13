@@ -67,3 +67,7 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+
+# Ignore de db files created by the docker
+/databaseDocker/data/*
