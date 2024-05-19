@@ -319,82 +319,46 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <div class="col-lg-3 mb-4">
+                        <% if @books.present?%>
+                            <% @books.each do |book| %>
+                                <div class="col-lg-3 mb-4">
 
-                            <!-- Item libro 1 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><%=@data['items'][0]['volumeInfo']['title'] %></p></h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                            src="<%= @data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] %>" alt="...">
+                                    <!-- Item libro -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary"><%=book['volumeInfo']['title'] %></p></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
+                                                    src="<% if book['volumeInfo']['imageLinks'].present? %>
+                                                            <%= book['volumeInfo']['imageLinks']['smallThumbnail'] %>
+                                                        <% else %>
+                                                        https://d3525k1ryd2155.cloudfront.net/h/848/258/116258848.0.m.jpg
+                                                        <% end %>" alt="...">
+                                            </div>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Autores:</div> <span><p>
+                                            <% if book['volumeInfo']['authors'].present? %>
+                                                <%= book['volumeInfo']['authors'].join(", ") %>
+                                            <% else %>
+                                                Sin autor
+                                            <% end %></p></span>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= book['volumeInfo']['publishedDate'] %></p></span>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Categorías:</div> <span><p>
+                                                <% if book['volumeInfo']['categories'].present? %>
+                                                    <%= book['volumeInfo']['categories'].join(", ") %>
+                                                <% else %>
+                                                    Sin categoría
+                                                <% end %></p></span>
+                                            <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver más detalles del libro &rarr;</a>
+                                        </div>
                                     </div>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Autor:</div> <span><p><%= @data['items'][0]['volumeInfo']['authors'][0] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= @data['items'][0]['volumeInfo']['publishedDate'] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Categoría:</div> <span><p><%= @data['items'][0]['volumeInfo']['categories'][0] %></p></span>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver más detalles del libro &rarr;</a>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col-lg-3 mb-4">
-
-                            <!-- Item libro 2 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><%=@data['items'][1]['volumeInfo']['title'] %></p></h6>
                                 </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                            src="<%= @data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] %>" alt="...">
-                                    </div>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Autor:</div> <span><p><%= @data['items'][1]['volumeInfo']['authors'][0] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= @data['items'][1]['volumeInfo']['publishedDate'] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Categoría:</div> <span><p><%= @data['items'][1]['volumeInfo']['categories'][0] %></p></span>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver más detalles del libro &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 mb-4">
-
-                            <!-- Item libro 3 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><%=@data['items'][2]['volumeInfo']['title'] %></p></h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                            src="<%= @data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] %>" alt="...">
-                                    </div>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Autor:</div> <span><p><%= @data['items'][2]['volumeInfo']['authors'][0] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= @data['items'][2]['volumeInfo']['publishedDate'] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Categoría:</div> <span><p><%= @data['items'][2]['volumeInfo']['categories'][0] %></p></span>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver más detalles del libro &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 mb-4">
-                            <!-- Item libro 4 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary"><%=@data['items'][3]['volumeInfo']['title'] %></p></h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                            src="<%= @data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] %>" alt="...">
-                                    </div>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Autor:</div> <span><p><%= @data['items'][3]['volumeInfo']['authors'][0] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= @data['items'][3]['volumeInfo']['publishedDate'] %></p></span>
-                                    <div class="h6 mb-0 font-weight-bold text-gray-800">Categoría:</div> <span><p><%= @data['items'][3]['volumeInfo']['categories'][0] %></p></span>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Ver más detalles del libro &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
+                            <%end %>
+                        <% else %>
+                            <p>No se encontraron libros.</p>
+                        <% end %>
                     </div>
 
                 </div>
