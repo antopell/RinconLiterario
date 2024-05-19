@@ -4,9 +4,9 @@ class LibraryController < ApplicationController
         @books = @data ? @data['items'] : []
     end
 
-    def get_book
+    def get_books(book)
         api_service = ExternalApiService.new()
-        params = {search:"Good Omens"}
+        params = {search:book}
         begin
           @data = api_service.fetch_books2(params)
         rescue => e
@@ -16,7 +16,12 @@ class LibraryController < ApplicationController
     end
 
     def library
-        get_book
+        @search_query = params[:search] || ""
+        if @search_query.present?
+          get_books(@search_query)
+        else
+          @books = []
+        end
         my_books
     end
 
