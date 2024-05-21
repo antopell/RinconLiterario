@@ -13,9 +13,9 @@ class ExternalApiService
     end
 
     def fetch_books2(params)       #esta y la anterior son dos maneras distintas de llamar al servicio, esta de abajo me parece más prolija
-        query = {
+        query = { #ver despues si se puede consultar de manera paginada
           q: params[:search],
-          maxResults: 15,
+          maxResults: 24,
           key: ENV['API_KEY']
         }
         response = self.class.get('/volumes', query: query)
