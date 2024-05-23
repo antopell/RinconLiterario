@@ -12,7 +12,7 @@ class UsuariosController < ApplicationController
       redirect_to root_path, notice: "Usuario creado correctamente"
       # render json: usuario, status: :created;
     else 
-      render :signIn, notice: usuario.errors.full_messages
+      redirect_to :signIn, alert: "El usuario no se pudo crear"
       # render json: {errors: usuario.errors.full_messages}, status: :unprocessable_entity
     end
   end

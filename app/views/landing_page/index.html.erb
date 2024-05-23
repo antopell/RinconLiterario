@@ -19,6 +19,11 @@
         </div>
 
         <div class="main">
+            <% if flash[:notice] %>
+                <div class="alert alert-success">
+                    <%= flash[:notice] %>
+                </div>
+            <% end %>
             <h1>Rincón Literario</h1>
             <h2>Tu estante de libros online favorito</h2>
         </div>
