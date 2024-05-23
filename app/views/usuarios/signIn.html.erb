@@ -40,25 +40,29 @@
                                         <h4 class="h4 text-gray-900 mb-4">Crear un nuevo usuario</h4>
                                         <h5 class="h5 text-gray-900 mb-4">Ingresá tu email y una contraseña para tu nuevo usuario</h5>
                                     </div>
+                                    <%= form_with(model: @usuario, url: crear_path, local: true) do |form| %>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="inputUsername" aria-describedby="usernameHelp"
-                                                placeholder="Username">
+                                            <%= form.text_field :username, 
+                                                class: "form-control form-control-user",
+                                                aria_describedby: "usernameHelp", 
+                                                placeholder: "Username" %>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="inputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email">
+                                            <%= form.email_field :mail, 
+                                                class: "form-control form-control-user",
+                                                aria_describedby: "emailHelp", 
+                                                placeholder: "Email" %>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="inputPassword" placeholder="Contraseña">
+                                            <%= form.password_field :password, 
+                                                class: "form-control form-control-user",
+                                                placeholder: "Contraseña" %>
                                         </div>
-                                        <a href="index.html" class="btn btn-secondary btn-block">
-                                        Crear un nuevo usuario
-                                        </a>
+                                        <%= form.submit "Crear un nuevo usuario", 
+                                            class: "btn btn-secondary btn-block" %>
                                     </form>
+                                    <% end %>
                         </div>
                     </div>
                 </div>

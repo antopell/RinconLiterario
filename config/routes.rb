@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'landing_page#index'
-  get 'logIn', to: "usuario#logIn"
-  get 'signIn', to: "usuario#signIn"
+
+  get 'signIn', to: "usuarios#signIn"
+  post 'signIn', to: "usuarios#crear", as: "crear"
+  get 'logIn', to: "usuarios#logIn"
   get 'library', to: 'library#library'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

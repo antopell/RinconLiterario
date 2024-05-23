@@ -7,6 +7,9 @@ gem 'rdoc', '<= 6.4.1.1'
 gem 'psych', '<= 4.0.3'
 gem "error_highlight", "= 0.3.0"
 
+# Para encriptacion de las contraseñas de usuarios
+gem 'bcrypt'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
