@@ -31,7 +31,11 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
-
+                <% if flash[:alert] %>
+                    <div class="alert alert-danger">
+                        <%= flash[:alert] %>
+                    </div>
+                <% end %>
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -40,21 +44,24 @@
                                         <h4 class="h4 text-gray-900 mb-4">Iniciar Sesión</h4>
                                         <h5 class="h5 text-gray-900 mb-4">Ingresá tu email para loggearte</h5>
                                     </div>
+                                    <%= form_with(model: @usuario, url: log_in_path, local: true) do |form| %>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="inputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email">
+                                            <%= form.email_field :mail, 
+                                                class: "form-control form-control-user",
+                                                aria_describedby: "emailHelp", 
+                                                placeholder: "Email" %>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="inputPassword" placeholder="Contraseña">
+                                            <%= form.password_field :password, 
+                                            class: "form-control form-control-user",
+                                            placeholder: "Contraseña" %>
                                         </div>
-                                        <a href="index.html" class="btn btn-secondary btn-block">
-                                        Iniciar sesión con email
-                                        </a>
+                                        <%= form.submit "Iniciar sesión con email", 
+                                            class: "btn btn-secondary btn-block" %>
                                         <hr>
                                     </form>
+                                    <% end %>
                                     <div class="row" >
                                         <h4 class="h6 col align-self-end">¿No tenés una cuenta?</h4>
                                         <a class="btn col btn-success register" href="<%= signIn_path %>">Registrarme</a>

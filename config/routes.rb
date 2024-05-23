@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get 'signIn', to: "usuarios#signIn"
   post 'signIn', to: "usuarios#crear", as: "crear"
-  get 'logIn', to: "usuarios#logIn"
+  get 'logIn', to: "sessions#logIn"
+  post 'logIn', to: "sessions#crear", as: "log_in"
   get 'library', to: 'library#library'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
