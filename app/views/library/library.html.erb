@@ -280,15 +280,16 @@
         </div>
     </div>
 
-    <!-- Custom scripts for all pages-->
-    <%= javascript_include_tag 'sb-admin-2.min' %>
-
-    <!-- Core plugin JavaScript-->
-    <%= javascript_include_tag 'jquery.easing.min' %>
+    
+    <!-- Core plugin JavaScript
+    <%= javascript_include_tag 'jquery.easing.min' %>-->
 
     <!-- Bootstrap core JavaScript-->
+    <%= javascript_include_tag 'jquery.min.js' %>
     <%= javascript_include_tag 'bootstrap.bundle.min' %>
-
+    
+    <!-- Custom scripts for all pages-->
+    <%= javascript_include_tag 'sb-admin-2.min' %>
 
 </body>
 
