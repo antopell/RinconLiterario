@@ -47,16 +47,11 @@
     --gray: #858796;
     --gray-dark: #5a5c69;
     --primary: var(--custom-verde);
-    /* --primary-hover: #224abe; */
     --primary-hover: var(--custom-verde-hover);
-    /* --secondary: #858796; */
     --secondary: var(--custom-verde-oscuro);
     --secondary-hover: var(--custom-verde-oscuro-hover);
-    /* --secondary-hover: #717384; */
     --success: var(--custom-rosa);
-    /* --success: #1cc88a; */
     --success-hover: var(--custom-rosa-hover);
-    /* --success-hover: #17a673; */
     --info: #36b9cc;
     --warning: #f6c23e;
     --danger: #e74a3b;
@@ -2477,7 +2472,6 @@
     color: #fff;
     background-color: var(--success-hover);
     border-color: var(--success-hover);
-    /* box-shadow: 0 0 0 0.2rem rgba(62, 208, 156, 0.5); */
   }
   
   .btn-success.disabled, .btn-success:disabled {
