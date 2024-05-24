@@ -1,7 +1,4 @@
 class UsuariosController < ApplicationController
-  def logIn
-  end
-
   def signIn
     @usuario = Usuario.new
   end
@@ -9,7 +6,8 @@ class UsuariosController < ApplicationController
   def crear
     usuario = Usuario.new(usuario_params)
     if (usuario.save)
-      redirect_to root_path, notice: "Usuario creado correctamente"
+      session[:usuario_id] = @usuario.id
+      redirect_to library_path
       # render json: usuario, status: :created;
     else 
       redirect_to :signIn, alert: "El usuario no se pudo crear"
