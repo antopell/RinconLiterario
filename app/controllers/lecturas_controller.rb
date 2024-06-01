@@ -8,6 +8,20 @@ class LecturasController < ApplicationController
         @lectura = Lectura.new
     end
 
+    def library
+        @lecturas = Lectura.all
+    end
+
+    def search
+        @search_query = params[:search] || ""
+        if @search_query.present?
+            @lecturas = Lectura.where("book_title ilike ?", "%#{@search_query}%")
+        else
+            @lecturas = []
+        end
+        pp @lecturas
+    end
+
     def create
         @lectura = Lectura.new(lectura_params)
         @lectura.username = current_user.username
