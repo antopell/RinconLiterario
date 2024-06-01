@@ -191,7 +191,7 @@
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
                                             <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></p></h6>
                                             <hr>
-                                            <%= link_to save_book_path(@book['id']), data: { bs_toggle: "modal", bs_target: "#saveBookModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Guardar libro<i class="fa-solid fa-plus ml-2"></i></button><% end %>
+                                            <%= link_to new_lectura_path, data: { bs_toggle: "modal", bs_target: "#saveBookModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Guardar libro<i class="fa-solid fa-plus ml-2"></i></button><% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center" style="text-align-last: left; display: inline-flex;">
@@ -315,7 +315,7 @@
     <!-- Modal crear reseña -->
     <%= render 'book_details/create_rating' %>
     <!-- Modal Agregar libro -->
-    <%= render 'book_details/save_book' %>
+    <%= render 'lecturas/new' %>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

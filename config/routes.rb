@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :book_details
+  resources :lecturas, only: [:new, :create]
   root 'landing_page#index'
 
   get 'signIn', to: "usuarios#signIn"
