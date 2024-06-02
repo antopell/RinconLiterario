@@ -36,16 +36,6 @@ class BooksController < ApplicationController
         end
     end
 
-    def library
-        @search_query = params[:search] || ""
-        if @search_query.present?
-          get_books(@search_query)
-        else
-          @books = []
-        end
-        my_books
-    end
-
     def search
         @search_query = params[:search] || ""
         if @search_query.present?
