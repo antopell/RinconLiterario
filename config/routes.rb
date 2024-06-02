@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :book_details
+  resources :lecturas, only: [:new, :create]
   root 'landing_page#index'
 
   get 'signIn', to: "usuarios#signIn"
@@ -7,7 +8,9 @@ Rails.application.routes.draw do
   get 'logIn', to: "sessions#logIn"
   post 'logIn', to: "sessions#crear", as: "log_in"
   delete 'logOut', to: "sessions#logOut", as: "log_out"
-  get 'library', to: 'library#library'
+  get 'library', to: 'lecturas#library'
+  get 'lecture_search', to: 'lecturas#search'
+  get 'book_search', to: 'books#search'
   get 'confirm_rating', to: 'book_details#confirm_rating', as: 'confirm_rating'
   get 'create_rating', to: 'book_details#create_rating', as: 'create_rating'
   get 'save_book', to: 'book_details#save_book', as: 'save_book'

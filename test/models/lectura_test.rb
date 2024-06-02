@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LibraryControllerTest < ActionDispatch::IntegrationTest
+class LecturaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

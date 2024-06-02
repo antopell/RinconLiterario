@@ -106,6 +106,16 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <!-- Topbar Search -->
+                    <%= form_with url: book_search_path, method: :get, local: true do %>
+                        <div class="input-group">
+                            <%= text_field_tag :search, @search_query, class: "form-control bg-light border-0 small", placeholder: "Buscar título..." %>
+                            <div class="input-group-append">
+                                <%= submit_tag "Buscar", class: "btn btn-primary" %>
+                            </div>
+                        </div>
+                    <% end %>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -165,6 +175,13 @@
                                     </a>
                                 </div>
                             </li>
+                        <% else %>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="logIn">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Log in</span>
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                            </li>
                         <% end %>
 
                     </ul>
@@ -177,110 +194,49 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 ">Detalles del libro</h1>
+                        <h1 class="h3 mb-0 ">Búsqueda</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <% if @book.present?%>
-                                <div class="col-lg-8 mb-4">
+                        <% if @books.present?%>
+                            <% @books.each do |book| %>
+                                <div class="col-lg-3 mb-4">
 
                                     <!-- Item libro -->
                                     <div class="card shadow mb-4">
-                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></p></h6>
-                                            <hr>
-                                            <%= link_to new_lectura_path, data: { bs_toggle: "modal", bs_target: "#saveBookModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Guardar libro<i class="fa-solid fa-plus ml-2"></i></button><% end %>
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary"><%=book['volumeInfo']['title'] %></p></h6>
                                         </div>
                                         <div class="card-body">
-                                            <div class="text-center" style="text-align-last: left; display: inline-flex;">
-                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 287px; height: auto;"
-                                                    src="<% if @book['volumeInfo']['imageLinks'].present? %>
-                                                            <%= @book['volumeInfo']['imageLinks']['thumbnail'] %>
+                                            <div class="text-center">
+                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
+                                                    src="<% if book['volumeInfo']['imageLinks'].present? %>
+                                                            <%= book['volumeInfo']['imageLinks']['thumbnail'] %>
                                                         <% else %>
                                                         https://d3525k1ryd2155.cloudfront.net/h/848/258/116258848.0.m.jpg
                                                         <% end %>" alt="...">
-                                                <div style="align-content: center;">
-                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Autores:</p> <span><p>
-                                                    <% if @book['volumeInfo']['authors'].present? %>
-                                                        <%= @book['volumeInfo']['authors'].join(", ") %>
-                                                    <% else %>
-                                                        Sin autor
-                                                    <% end %></p></span>
-                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</p> <span><p><%= @book['volumeInfo']['publishedDate'] %></p></span>
-                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Editora:</p> <span><p><%= @book['volumeInfo']['publisher'] %></p></span>
-                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Categorías:</p> <span><p>
-                                                        <% if @book['volumeInfo']['categories'].present? %>
-                                                            <%= @book['volumeInfo']['categories'].join(", ") %>
-                                                        <% else %>
-                                                            Sin categoría
-                                                        <% end %></p></span>
-                                                    <% if @book['saleInfo']['listPrice'].present? %>
-                                                        <div class="h6 mb-0 font-weight-bold text-gray-800">Precio:</div> <span><p>
-                                                            <%= @book['saleInfo']['listPrice']['amount'] %> <%= @book['saleInfo']['listPrice']['currencyCode'] %></p></span>
-                                                    <% else %>      
-                                                    <% end %>
-                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Calificar</p> 
-                                                    <div style="display: inline-flex;">
-                                                        <% 1.upto(5) do |i| %>
-                                                            <%= link_to confirm_rating_path(rating: i), data: { bs_toggle: "modal", bs_target: "#confirmRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %>
-                                                                <i class="fa-regular fa-star"></i>
-                                                            <% end %>
-                                                        <% end %>
-                                                    </div>
-                                                </div>
-                              
                                             </div>
-                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Descripción:</div> <span><p><%=@book['volumeInfo']['description']%></p></span>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Autores:</div> <span><p>
+                                            <% if book['volumeInfo']['authors'].present? %>
+                                                <%= book['volumeInfo']['authors'].join(", ") %>
+                                            <% else %>
+                                                Sin autor
+                                            <% end %></p></span>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= book['volumeInfo']['publishedDate'] %></p></span>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Categorías:</div> <span><p>
+                                                <% if book['volumeInfo']['categories'].present? %>
+                                                    <%= book['volumeInfo']['categories'].join(", ") %>
+                                                <% else %>
+                                                    Sin categoría
+                                                <% end %></p></span>
+                                            <a target="_blank" rel="nofollow" href="<%= book_detail_path(book['id'])%>">Ver más detalles del libro &rarr;</a>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="col-lg-4 mb-4">
-                                    <!-- Item Reviews -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary">Reseñas</h6>
-                                            <hr>
-                                            <%= link_to create_rating_path(@book['id']), data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Crear reseña<i class="fa-solid fa-star ml-2"></i></button><% end %>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <div style="align-content: center;">
-                                                    <div style="display: inline-flex;">
-                                                        <% 1.upto(5) do |i| %>
-                                                                <i class="fa-regular fa-star"></i>
-                                                            <% end %>
-                                                        <p class="h6 mb-0 font-weight-bold text-gray-800 ml-2">5800 reviews</p> 
-                                                    </div>
-                                                </div>
-                                                <!-- Divider -->
-                                                <hr class="sidebar-divider">
-                                                
-                                                <!-- Tarjetas de reviews -->
-                                                <div class="card shadow h-100 py-2 mb-2">
-                                                    <div class="card-body">
-                                                        <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
-                                                                <div class="h5 font-weight-bold text-primary text-uppercase mb-1">
-                                                                    Jonas Sousa</div>
-                                                                <div class="text-s mb-0 text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu tempus nisl. Maecenas sit amet nulla ut ligula maximus finibus malesuada vel augue. Nullam ultrices sapien non mattis auctor. Aenean feugiat lectus nisi, eget congue velit hendrerit eget. Pellentesque ornare tellus et accumsan congue. Phasellus luctus urna non lobortis faucibus. Duis mollis, orci in elementum egestas, est risus sodales urna, eget lobortis erat urna a nisl. Mauris aliquet eros diam, non posuere felis ornare sed. Pellentesque risus lorem, blandit non est ac, aliquam dapibus justo. Etiam sed purus maximus, laoreet leo quis, porttitor magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sodales libero nec auctor bibendum.</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div style="display: inline-flex;">
-                                                                    <% 1.upto(5) do |i| %>
-                                                                            <i class="fa-regular fa-star"></i>
-                                                                        <% end %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a target="_blank" rel="nofollow" href="">Ver todas las reseñas del libro &rarr;</a>
-                                        </div>
-                                    </div>
+                            <%end %>
                         <% else %>
                             <p>No se encontraron libros.</p>
                         <% end %>
@@ -308,15 +264,6 @@
     </div>
     <!-- End of Page Wrapper -->
 
-
-    
-    <!-- Modal Rating estrellas -->
-    <%= render 'book_details/confirm_rating' %>
-    <!-- Modal crear reseña -->
-    <%= render 'book_details/create_rating' %>
-    <!-- Modal Agregar libro -->
-    <%= render 'lecturas/new' %>
-
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -328,15 +275,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Deséas cerrar tu sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <i class="fa-solid fa-xmark"></i>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <%= button_to "Log out", log_out_path, method: :delete, class: "btn btn-primary" %>
                 </div>
             </div>
         </div>
