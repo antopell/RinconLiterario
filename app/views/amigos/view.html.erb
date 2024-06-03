@@ -41,7 +41,7 @@
 
             <!-- Nav Item - Biblioteca -->
             <li class="nav-item active">
-                <a class="nav-link" href="<%= library_path%>">
+                <a class="nav-link" href="<%= library_path(@books)%>">
                     <i class="fa-solid fa-book"></i>
                     <span>Biblioteca</span></a>
             </li>
@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Buscar -->
             <li class="nav-item">
-                <a class="nav-link" href="<%= book_search_path%>">
+                <a class="nav-link" href="<%= book_search_path %>">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span>Buscar</span></a>
             </li>
@@ -71,7 +71,8 @@
 
             <!-- Nav Item - Amigos -->
             <li class="nav-item">
-                <a class="nav-link" href="<%=amigos_path %>">
+                <a class="nav-link" href="<%=amigos_path %>
+                ">
                     <i class="fa-solid fa-user-group"></i>
                     <span>Amigos</span></a>
             </li>
@@ -106,15 +107,15 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <%= form_with url: book_search_path, method: :get, local: true do %>
+                    <!-- Topbar Search --> <!--
+                    <%= form_with url: library_path, method: :get, local: true do %>
                         <div class="input-group">
                             <%= text_field_tag :search, @search_query, class: "form-control bg-light border-0 small", placeholder: "Buscar título..." %>
                             <div class="input-group-append">
                                 <%= submit_tag "Buscar", class: "btn btn-primary" %>
                             </div>
                         </div>
-                    <% end %>
+                    <% end %> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -194,52 +195,21 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 ">Búsqueda</h1>
+                        <h1 class="h3 mb-0 ">Amigos</h1>
                     </div>
+                    <% if flash[:alert] %>
+                        <div class="alert alert-warning">
+                            <%= flash[:alert] %>
+                            <%= link_to 'Iniciar sesión', logIn_path, class: 'btn btn-primary' %>
+                        </div>
+                    <% end %>
 
+                    <%= yield %>
                     <!-- Content Row -->
                     <div class="row">
-
-                        <% if @books.present?%>
-                            <% @books.each do |book| %>
-                                <div class="col-lg-3 mb-4">
-
-                                    <!-- Item libro -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary"><%=book['volumeInfo']['title'] %></p></h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                                    src="<% if book['volumeInfo']['imageLinks'].present? %>
-                                                            <%= book['volumeInfo']['imageLinks']['thumbnail'] %>
-                                                        <% else %>
-                                                        https://d3525k1ryd2155.cloudfront.net/h/848/258/116258848.0.m.jpg
-                                                        <% end %>" alt="...">
-                                            </div>
-                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Autores:</div> <span><p>
-                                            <% if book['volumeInfo']['authors'].present? %>
-                                                <%= book['volumeInfo']['authors'].join(", ") %>
-                                            <% else %>
-                                                Sin autor
-                                            <% end %></p></span>
-                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Fecha de publicación:</div> <span><p><%= book['volumeInfo']['publishedDate'] %></p></span>
-                                            <div class="h6 mb-0 font-weight-bold text-gray-800">Categorías:</div> <span><p>
-                                                <% if book['volumeInfo']['categories'].present? %>
-                                                    <%= book['volumeInfo']['categories'].join(", ") %>
-                                                <% else %>
-                                                    Sin categoría
-                                                <% end %></p></span>
-                                            <a target="_blank" rel="nofollow" href="<%= book_detail_path(book['id'])%>">Ver más detalles del libro &rarr;</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            <%end %>
-                        <% else %>
-                            <p>No se encontraron libros.</p>
-                        <% end %>
+                        <!-- aca hay que agregar un if con el resultado que de la
+                        busqueda de amigos, caso contrario aparecera como que no tiene amigos.-->    
+                     
                     </div>
 
                 </div>

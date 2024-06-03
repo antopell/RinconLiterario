@@ -4,8 +4,8 @@ class UsuariosController < ApplicationController
   end
 
   def crear
-    usuario = Usuario.new(usuario_params)
-    if (usuario.save)
+    @usuario = Usuario.new(usuario_params)
+    if (@usuario.save)
       session[:usuario_id] = @usuario.id
       redirect_to library_path
       # render json: usuario, status: :created;
