@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #get 'amigos/view'
+  
   resources :book_details
   resources :lecturas, only: [:new, :create]
   root 'landing_page#index'
@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get 'amigos', to: 'amigos#view'
   get 'amigos/restricted_action', to: 'amigos#restricted_action'
   get 'amigos/public_action', to: 'amigos#public_action'
+
+  get 'notificaciones', to: 'notificaciones#view'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
