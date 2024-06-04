@@ -9,7 +9,11 @@ class LecturasController < ApplicationController
     end
 
     def library
-        @lecturas = Lectura.all
+        if (logged_in?)
+            @lecturas = Lectura.where(username: current_user.username)
+        else
+            @lecturas = []
+        end
     end
 
     def search

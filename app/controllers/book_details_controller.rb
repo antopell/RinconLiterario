@@ -3,7 +3,7 @@ class BookDetailsController < ApplicationController
     helper_method :rate
 
     def show
-        @rating = nil;
+        @rating = 0;
         api_service = ExternalApiService.new()
         @book = api_service.fetch_volume_by_id2(params)
         @lectura = Lectura.new #ver si se puede sacar

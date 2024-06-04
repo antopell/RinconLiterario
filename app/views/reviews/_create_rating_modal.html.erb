@@ -1,6 +1,4 @@
-<!-- app/views/book_details/create_rating.html.erb -->
-
-<div class="modal fade" id="createRatingModal" tabindex="-1" aria-labelledby="createRatingModalLabel" aria-hidden="true">
+<div class="modal fade" id="createRatingModal" tabindex="-1" role="dialog" open="false" aria-labelledby="createRatingModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,8 +6,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
-        <p>FALTA CREAR EL FORMULARIO ACA PARA UNA NUEVA RESEÑA</p>
+        <p> LIBRO PASADO: <%= book_id %></p>
+        <p> RATING PASADO: <%= session[:rating] %></p>
+        <p> RATING PASADO: <%= rating %></p>
       </div>
+      <%= form_with(model: Review, url: create_rating_path, local: true) do |form| %>
+        <div class="form-group">
+            <%= form.text_area :comment, 
+            class: "form-control form-control",
+            placeholder: "Comentario" %>
+        </div>
+      <%= form.submit "Publicar review", 
+      class: "btn btn-primary btn-block" %>
+                                        
+      <% end %>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>

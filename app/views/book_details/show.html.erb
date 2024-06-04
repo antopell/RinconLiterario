@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Reseñas -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<%= reviews_path %>">
                     <i class="fa-solid fa-star"></i>
                     <span>Reseñas</span></a>
             </li>
@@ -224,7 +224,11 @@
                                                     <p class="h6 mb-0 font-weight-bold text-gray-800">Calificar</p> 
                                                     <div style="display: inline-flex;">
                                                         <% 1.upto(5) do |i| %>
-                                                            <%= link_to confirm_rating_path(rating: i), data: { bs_toggle: "modal", bs_target: "#confirmRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %>
+                                                            <%= link_to "", 
+                                                                data: { bs_toggle: "modal", bs_target: "#createRatingModal" },
+                                                                class: "mr-2 btn btn-link",
+                                                                style: "padding: 0; border: none;",
+                                                                onclick: @rating = i do %>
                                                                 <i class="fa-regular fa-star"></i>
                                                             <% end %>
                                                         <% end %>
@@ -243,7 +247,11 @@
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
                                             <h3 class="m-0 font-weight-bold text-primary">Reseñas</h6>
                                             <hr>
-                                            <%= link_to create_rating_path(@book['id']), data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Crear reseña<i class="fa-solid fa-star ml-2"></i></button><% end %>
+                                            <%= link_to create_rating_path, 
+                                                data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, 
+                                                class: "btn btn-secondary ml-2 mr-2" do %>
+                                                    Crear reseña<i class="fa-solid fa-star ml-2"></i>
+                                            <% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
@@ -310,10 +318,10 @@
 
 
     
-    <!-- Modal Rating estrellas -->
-    <%= render 'book_details/confirm_rating' %>
+    <!-- Modal Rating estrellas 
+    <%= render 'book_details/confirm_rating' %>-->
     <!-- Modal crear reseña -->
-    <%= render 'book_details/create_rating' %>
+    <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id'], rating: @rating}%>
     <!-- Modal Agregar libro -->
     <%= render 'lecturas/new' %>
 
@@ -345,14 +353,15 @@
     
     <!-- Core plugin JavaScript
     <%= javascript_include_tag 'jquery.easing.min' %>-->
-
+    
     <!-- Bootstrap core JavaScript-->
     <%= javascript_include_tag 'jquery.min.js' %>
     <%= javascript_include_tag 'bootstrap.bundle.min' %>
     
     <!-- Custom scripts for all pages-->
     <%= javascript_include_tag 'sb-admin-2.min' %>
-
+    
+    <!-- <%= javascript_include_tag 'create_rating.js' %>-->
 </body>
 
 </html>
