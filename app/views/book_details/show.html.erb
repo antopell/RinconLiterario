@@ -189,7 +189,7 @@
                                     <!-- Item libro -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></p></h6>
+                                            <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></h3>
                                             <hr>
                                             <%= link_to new_lectura_path, data: { bs_toggle: "modal", bs_target: "#saveBookModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Guardar libro<i class="fa-solid fa-plus ml-2"></i></button><% end %>
                                         </div>
@@ -223,14 +223,20 @@
                                                     <% end %>
                                                     <p class="h6 mb-0 font-weight-bold text-gray-800">Calificar</p> 
                                                     <div style="display: inline-flex;">
-                                                        <% 1.upto(5) do |i| %>
-                                                            <%= link_to "", 
-                                                                data: { bs_toggle: "modal", bs_target: "#createRatingModal" },
-                                                                class: "mr-2 btn btn-link",
-                                                                style: "padding: 0; border: none;",
-                                                                onclick: @rating = i do %>
-                                                                <i class="fa-regular fa-star"></i>
-                                                            <% end %>
+                                                        <%= form_with url: create_rating_path, method: :get do |form| %>
+                                                            <div class="form-group">
+                                                                <% 1.upto(5) do |value| %>
+                                                                    <label for="star_<%= value %>" class="form-check-label">
+                                                                    <i class="fa-regular fa-star"></i>
+                                                                    <%= radio_button_tag :rating, 
+                                                                    value, 
+                                                                    class: "form-check-input d-none",
+                                                                        checked: false,
+                                                                        id: "star_#{value}",
+                                                                        onclick: "form.submit()"%>
+                                                                        </label>
+                                                                <% end %>
+                                                            </div>
                                                         <% end %>
                                                     </div>
                                                 </div>
@@ -321,7 +327,7 @@
     <!-- Modal Rating estrellas 
     <%= render 'book_details/confirm_rating' %>-->
     <!-- Modal crear reseña -->
-    <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id'], rating: @rating}%>
+    <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id']}%>
     <!-- Modal Agregar libro -->
     <%= render 'lecturas/new' %>
 
@@ -362,6 +368,13 @@
     <%= javascript_include_tag 'sb-admin-2.min' %>
     
     <!-- <%= javascript_include_tag 'create_rating.js' %>-->
+
+    <% if @rating %>                                                                  
+        <script>
+            console.log("entre");
+            $('#createRatingModal').modal('show');
+        </script>
+    <% end %> 
 </body>
 
 </html>

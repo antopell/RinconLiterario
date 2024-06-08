@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get 'lecture_search', to: 'lecturas#search'
   get 'book_search', to: 'books#search'
   get 'confirm_rating', to: 'book_details#confirm_rating', as: 'confirm_rating'
-  get 'create_rating', to: 'reviews#create_rating_modal', as: 'create_rating'
+  get 'create_rating', to: 'book_details#create_rating', as: 'create_rating'
+  get 'reset_rating', to: 'book_details#reset_rating', as: 'reset_rating'
   get 'save_book', to: 'book_details#save_book', as: 'save_book'
 
   get 'reviews', to: "reviews#reviews"
