@@ -197,6 +197,7 @@
                         <h1 class="h3 mb-0 ">Biblioteca</h1>
                     </div>
 
+                    <%= render 'layouts/messages' %>
                     <!-- Content Row -->
                     <div class="row">
 
@@ -217,8 +218,9 @@
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                     aria-labelledby="dropdownMenuLink">
                                                     <div class="dropdown-header">Acciones:</div>
-                                                    <a class="dropdown-item" href="#">Eliminar lectura</a>
                                                     <a class="dropdown-item" href="<%= book_detail_path(lectura.book_id) %>">Abrir detalles del libro</a>
+                                                    <%= link_to "Eliminar lectura", lectura_path(lectura), method: :delete, 
+                                                    data: { confirm: "¿Estás seguro que querés eliminar la lectura?"}, class: "dropdown-item" %>
                                                 </div>
                                             </div>
                                         </div>

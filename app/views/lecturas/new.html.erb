@@ -10,11 +10,11 @@
       <%= form_with(model: @lectura, scope: "lectura", url:lecturas_path, local:true) do |f|%>
         <div class="modal-body">
               <%= f.label :lecture_state, 'Estado de la lectura: ' %>
-              <%= f.select :lecture_state, ["Por leer", "Leyendo", "Leído", "No finalizado"] %>
+              <%= f.select :lecture_state, ["Por leer", "Leyendo", "Leído", "No finalizado"], :include_blank => true%>
               <%= f.label :reading_start_date, 'Fecha de inicio de la lectura: ' %>
-              <%= f.date_select :reading_start_date %>
+              <%= f.date_select :reading_start_date, start_year: 1950, end_year: Time.now.year, :include_blank => true%>
               <%= f.label :reading_end_date, 'Fecha de fin de la lectura: ' %>
-              <%= f.date_select :reading_end_date %>
+              <%= f.date_select :reading_end_date, start_year: 1950, end_year: Time.now.year, :include_blank => true %>
               <%= f.hidden_field :username, value: current_user.username %>
               <%= f.hidden_field :book_title, value: session[:book_title] %>
               <%= f.hidden_field :book_id, value: session[:book_id] %>
