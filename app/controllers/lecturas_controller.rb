@@ -12,14 +12,15 @@ class LecturasController < ApplicationController
         @lecturas = Lectura.all
     end
 
-    def search
-        @search_query = params[:search] || ""
-        if @search_query.present?
+    def search #ver despues si corregir el tema de que se muestra el nombre del estado en el campo busqueda de titulos
+        @search_query = params[:search] || params[:lecture_state] || ""
+        if params[:lecture_state].present?
+            @lecturas = Lectura.where("lecture_state ilike ?", "%#{@search_query[0]}%")
+        elsif params[:lecture_state].present?
             @lecturas = Lectura.where("book_title ilike ?", "%#{@search_query}%")
         else
             @lecturas = []
         end
-        pp @lecturas
     end
 
     def create
