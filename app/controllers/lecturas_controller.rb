@@ -51,6 +51,8 @@ class LecturasController < ApplicationController
 
     def details
         @lectura = Lectura.find(params[:id])
+        @notas = Nota.where(lecture_id: params[:id])
+        session[:lecture_id] = params[:id] #ver de sacar esto de aca dsp
     end
 
     def update

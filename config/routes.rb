@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'details'
     end
   end
+  resources :notas
   root 'landing_page#index'
 
   get 'signIn', to: "usuarios#signIn"

@@ -221,21 +221,28 @@
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
                                             <h3 class="m-0 font-weight-bold text-primary">Notas</h6>
                                             <hr>
-                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
+                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
                                                 
                                                 <!-- Tarjetas de reviews -->
                                                 <div class="card shadow h-100 py-2 mb-2">
-                                                    <div class="card-body">
-                                                        <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
-                                                                <div class="h5 font-weight-bold text-primary text-uppercase mb-1">
-                                                                    Jonas Sousa</div>
-                                                                <div class="text-s mb-0 text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu tempus nisl. Maecenas sit amet nulla ut ligula maximus finibus malesuada vel augue. Nullam ultrices sapien non mattis auctor. Aenean feugiat lectus nisi, eget congue velit hendrerit eget. Pellentesque ornare tellus et accumsan congue. Phasellus luctus urna non lobortis faucibus. Duis mollis, orci in elementum egestas, est risus sodales urna, eget lobortis erat urna a nisl. Mauris aliquet eros diam, non posuere felis ornare sed. Pellentesque risus lorem, blandit non est ac, aliquam dapibus justo. Etiam sed purus maximus, laoreet leo quis, porttitor magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sodales libero nec auctor bibendum.</p>
-                                                            </div>
-                                                        </div>
+                                                    <div class="card-body row no-gutters align-items-center">
+                                                        <% if @notas.present?%>
+                                                            <% @notas.each do |nota| %>
+                                                                <div class="col mr-2">
+                                                                    <h1 class="h4 mb-3 "><%= nota.note %></h1>
+                                                                    <div class="text-s mb-0 text-gray-800">Fecha: <%= nota.created_at.to_date %></p>
+                                                                </div>
+                                                                <% if @notas.size > 1 %>
+                                                                    <!-- Divider -->
+                                                                    <hr class="sidebar-divider">
+                                                                <%end %>
+                                                            <%end %>
+                                                        <% else %>
+                                                            <p>No tiene notas.</p>
+                                                        <% end %> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -272,6 +279,8 @@
     
     <!-- Modal Editar Lectura -->
     <%= render 'lecturas/update' %>
+    <!-- Modal Agregar libro -->
+    <%= render 'notas/new' %>
 
 
     <!-- Scroll to Top Button-->
