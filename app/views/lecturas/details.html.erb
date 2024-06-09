@@ -232,7 +232,12 @@
                                                         <% if @notas.present?%>
                                                             <% @notas.each do |nota| %>
                                                                 <div class="col mr-2">
-                                                                    <h1 class="h4 mb-3 "><%= nota.note %></h1>
+                                                                    <% if nota.note.length > 200 %>
+                                                                        <%= truncate nota.note, length: 200 %>
+                                                                        <%= link_to 'Leer más' %>
+                                                                    <% else %>
+                                                                        <%= nota.note %>
+                                                                    <% end %>
                                                                     <div class="text-s mb-0 text-gray-800">Fecha: <%= nota.created_at.to_date %></p>
                                                                 </div>
                                                                 <% if @notas.size > 1 %>
