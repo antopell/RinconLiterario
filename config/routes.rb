@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :book_details
-  resources :lecturas, only: [:new, :create, :destroy]
+  resources :lecturas, only: [:new, :create, :destroy, :update] do
+    member do
+      get 'details'
+    end
+  end
   root 'landing_page#index'
 
   get 'signIn', to: "usuarios#signIn"

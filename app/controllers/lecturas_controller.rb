@@ -48,5 +48,20 @@ class LecturasController < ApplicationController
         flash[:danger] = "La lectura fue exitosamente eliminada"
         redirect_to library_path
     end
-    
+
+    def details
+        @lectura = Lectura.find(params[:id])
+    end
+
+    def update
+        @lectura = Lectura.find(params[:id])
+        if @lectura.update(lectura_params)
+          flash[:success] = "Lectura actualizada correctamente"
+        else
+          flash[:danger] = "Error al actualizar la lectura"
+          render :edit
+        end
+        redirect_to details_lectura_path(@lectura)
+    end
+
 end
