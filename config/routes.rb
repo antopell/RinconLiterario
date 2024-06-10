@@ -24,7 +24,12 @@ Rails.application.routes.draw do
 
   get 'notificaciones', to: 'notificaciones#view'
 
-  get 'usuario', to:'usuario#profile'
+  # Rutas RESTful para usuarios (incluyendo edit y update)
+  resources :usuarios, only: [:edit, :update]
+
+  get 'profile', to:'usuarios#profile', as:'profile'
+  get 'edit_user', to:'usuarios#edit_user', as:'edit_user'
+  post 'edit_user', to:'usuarios#edit_user'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

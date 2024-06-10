@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Perfil de Usuario</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fc;
+        }
+        #wrapper {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #98bf64;
+            padding: 10px;
+            width: 200px;
+        }
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            margin: 15px 0;
+        }
+        #sidebar ul li a {
+            color: #000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        #sidebar ul li a i {
+            margin-right: 10px;
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+        #profile-header {
+            background-color: #f08867;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #profile-header h1 {
+            margin: 0;
+            color: #fff;
+        }
+        #profile-header .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        #profile-header .profile-picture img {
+            width: 100%;
+            height: auto;
+        }
+
+        .profile-color{
+            background-color: #F19C79;
+        }
+        .profile-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        .profile-info {
+            display: flex;
+            align-items: self-start;
+            margin-bottom: 20px;
+            width: 60%;
+        }
+        .img-profile{
+          margin-right:20px;
+          max-width: 150px;
+          max-height: 150px;
+        }
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-details h2 {
+            margin: 0;
+        }
+        
+        .description {
+            margin: 20px 10px 0 0;
+        }
+        .profile-actions {
+            flex: 1;
+           
+        }
+        .profile-actions button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            color: #fff;
+            
+            cursor: pointer;
+        }
+
+        .bt-prop{
+          box-shadow: 2px 1px 10px 1px #000000;
+          border-radius: 5px;
+        }
+        .color-button1{
+            background-color: #c44a4a;
+        }
+        .color-button2{
+            background-color: #9C142D;
+        }
+
+        .color-reviews{
+            background-color: #A8B86C;
+        }
+        .title-reviews{
+            text-align: center;
+        }
+        .book-list {
+            container;
+            margin-top: 50px;
+            margin-left: -150px;
+        }
+        .book-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .book-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .review-list {
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .review-item {
+            display: flex;
+            margin-bottom: 10px;
+            margin-left: 15px;
+        }
+        .review-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .review-info {
+            flex: 1;
+        }
+        .review-info .stars {
+            display: flex;
+        }
+        .stars i {
+            color: #f39c12;
+            margin-right: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-primary sidebar accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= root_path %>">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Rincón Literario</div>
+      </a>
+      <hr class="sidebar-divider">
+      <li class="nav-item active">
+        <a class="nav-link" href="<%= library_path %>">
+          <i class="fa-solid fa-book"></i>
+          <span>Biblioteca</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= book_search_path %>">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Buscar</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= amigos_path %>">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Amigos</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= notificaciones_path %>">
+          <i class="fa-solid fa-bell"></i>
+          <span>Notificaciones</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+    </ul>
+    <!-- End of Sidebar -->
+<!-- Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow profile-color">
+              <h1 class="h3 mb-0  text-gray-800 ">Perfil</h1>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                      <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                          <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                              <i class="fas fa-search fa-sm"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
+                  <div class="topbar-divider d-none d-sm-block"></div>
+                  <% if logged_in? %>
+                    <li class="nav-item dropdown no-arrow">
+                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= current_user.username %></span>
+                        <i class="fa-solid fa-user"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profile">
+                          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                          Profile
+                        </a>
+                        <a class="dropdown-item" href="edit_user">
+                          <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                          Settings
+                        </a>
+                        <a class="dropdown-item" href="#">
+                          <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                          Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                          Logout
+                        </a>
+                      </div>
+                    </li>
+                  <% end %>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Profile Content -->
+            <div class="profile-content">
+              <div class="profile-info">
+                <img src="https://media.istockphoto.com/id/1320406965/es/foto/mujer-silueta-profesor-de-educaci%C3%B3n-libro-de-lectura.webp?s=1024x1024&w=is&k=20&c=GWV9Qxv3ML17AEJ6EZmR7U7Cvveu0iE4sn33Z0nrd4Q=" class="mg-fluid rounded-circle img-profile" alt="Profile Picture">
+                <div class="profile-details">
+                <div class="profile-details">
+                <h2>
+                  <% if current_user.nombre.present? && !current_user.nombre.strip.empty? %>
+                    <%= current_user.nombre %>
+                  <% else %>
+                    NOMBRE
+                  <% end %>
+                   
+                  <% if current_user.apellido.present? && !current_user.apellido.strip.empty? %>
+                    <%= current_user.apellido %>
+                  <% else %>
+                    APELLIDO
+                  <% end %>
+                </h2> 
+                <p class="description">Descripción</p>
+                <p class="text-gray-700 mr-4">
+                  <% if current_user.descripcion.present? && !current_user.descripcion.strip.empty? %>
+                    <%= current_user.descripcion %>
+                  <% else %>
+                    (debes agregar tu descripción)
+                  <% end %>
+                </p>
+              </div>
+                  <div class="book-list">
+                    <h3 class="font-weight-bold title-reviews">Últimos libros leídos</h3><br>
+                    <div class="book-item text-gray-700">
+                        <div class="book-info">
+                            <p>Título del libro</p>
+                            <p>Autor del libro</p>
+                            <p>Fecha de publicación</p>
+                        </div>
+                    </div>
+                    <div class="book-item text-gray-700">
+                        <div class="book-info">
+                            <p>Título del libro</p>
+                            <p>Autor del libro</p>
+                            <p>Fecha de publicación</p>
+                        </div>
+                    </div>
+              </div>
+                  </div>
+                
+              </div>
+                <div class="profile-actions">
+                  <a href="edit_user"><button class="color-button1 bt-prop">Editar perfil</button></a>
+                  <button class="color-button2 bt-prop">Agregar nueva lectura</button>
+                  <div class="review-list color-reviews py-3">
+                  <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
+                  <div class="review-item">
+                      <div class="review-info text-gray-700">
+                          <p>Título de libro</p>
+                          <div class="stars">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                          </div>
+                          <p class="text-gray-500">Descripción de la reseña.</p>
+                      </div>
+                  </div>
+                  <div class="review-item">
+                      <div class="review-info text-gray-700">
+                          <p>Título de libro</p>
+                          <div class="stars">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                          </div>
+                          <p class="text-gray-500">Descripción de la reseña.</p>
+                      </div>
+                  </div>
+            </div>
+                </div>
+            </div>
+            <!-- Review List -->
+            
+        </div>
+    </div>
+</body>
+</html>

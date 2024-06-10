@@ -68,107 +68,34 @@
         .profile-color{
             background-color: #F19C79;
         }
-        .profile-content {
-            display: flex;
-            margin-top: 20px;
-        }
-        .profile-info {
-            display: flex;
-            align-items: self-start;
-            margin-bottom: 20px;
-        }
-        .img-profile{
-          margin-right:20px;
-        }
-        .profile-details {
-            display: flex;
-            flex-direction: column;
-        }
-        .profile-details h2 {
-            margin: 0;
-        }
-        
-        .description {
-            margin: 20px 10px 0 0;
-        }
-        
-
-
-       
-        .profile-actions {
-            flex: 1;
-           
-        }
-        .profile-actions button {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            color: #fff;
-            
-            cursor: pointer;
+        .flex-container {
+          display: flex;
         }
 
-        .bt-prop{
-          box-shadow: 2px 1px 10px 1px #000000;
-          border-radius: 5px;
-        }
-        .color-button1{
-            background-color: #c44a4a;
-        }
-        .color-button2{
-            background-color: #9C142D;
+        .image-container {
+          flex: 0 0 auto; 
+          margin-right: 60px;
         }
 
-        .color-reviews{
-            background-color: #A8B86C;
+        .form-fields {
+          flex: 1 1 auto;
         }
-        .title-reviews{
-            text-align: center;
+
+        .user-image {
+          max-width: 200px;
         }
-        .book-list {
-            container;
-            margin-top: 50px;
-            margin-left: -150px;
+        .form-control{
+          background-color:#EDD3D3;
+          width: 60%;
+          border: none;
         }
-        .book-item {
-            display: flex;
-            margin-bottom: 10px;
+        .btn-color-1{
+          background-color:#9C142D
+          color: antiquewhite;
         }
-        .book-item img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        .book-info {
-            flex: 1;
-        }
-        .review-list {
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-        .review-item {
-            display: flex;
-            margin-bottom: 10px;
-            margin-left: 15px;
-        }
-        .review-item img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        .review-info {
-            flex: 1;
-        }
-        .review-info .stars {
-            display: flex;
-        }
-        .stars i {
-            color: #f39c12;
-            margin-right: 2px;
+        .btn-color-2{
+          background-color:#E76369
+          color: antiquewhite;
         }
     </style>
 </head>
@@ -244,11 +171,11 @@
                       <i class="fa-solid fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="profile">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
                       </a>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="edit_user">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                         Settings
                       </a>
@@ -266,71 +193,59 @@
                 <% end %>
               </ul>
             </nav>
+            <hr class="sidebar-divider">
             <!-- End of Topbar -->
-            <!-- Profile Content -->
-            <div class="profile-content">
-              <div class="profile-info">
-                <img src="https://via.placeholder.com/150" class="mg-fluid rounded-circle img-profile" alt="Profile Picture">
-                <div class="profile-details">
-                  <h2><%=current_user.username%></h2> 
-                  <p class="description">Descripción</p>
-                  <p class="text-gray-700 mr-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac gravida erat.</p>
-                  <div class="book-list">
-                    <h3>Últimos libros leídos</h3><br>
-                    <div class="book-item">
-                        <div class="book-info">
-                            <p>Título del libro</p>
-                            <p>Autor del libro</p>
-                            <p>Fecha de publicación</p>
-                        </div>
-                    </div>
-                    <div class="book-item">
-                        <div class="book-info">
-                            <p>Título del libro</p>
-                            <p>Autor del libro</p>
-                            <p>Fecha de publicación</p>
-                        </div>
-                    </div>
-              </div>
-                  </div>
-                
-              </div>
-                <div class="profile-actions">
-                    <button class="color-button1 bt-prop">Editar perfil</button>
-                    <button class="color-button2 bt-prop">Agregar nueva lectura</button>
-                    <div class="review-list color-reviews py-3">
-                    <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
-                        <div class="review-item">
-                            <div class="review-info text-gray-700">
-                                <p>Título de libro</p>
-                                <div class="stars">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <p class="text-gray-500">Descripción de la reseña.</p>
-                            </div>
-                        </div>
-                <div class="review-item">
-                    <div class="review-info">
-                        <p>Título de libro</p>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p>Descripción de la reseña.</p>
-                    </div>
-                </div>
-            </div>
-                </div>
-            </div>
-            <!-- Review List -->
+            <!-- User Edit Content -->
+            <%= form_with(model: @usuario, local: true) do |form| %>
+              <% if @usuario.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this user from being saved:</h2>
             
+                  <ul>
+                    <% @usuario.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            
+              <div class="form-group">
+                <div class="flex-container">
+                    <div class="image-container">
+                      <img src="https://media.istockphoto.com/id/1320406965/es/foto/mujer-silueta-profesor-de-educaci%C3%B3n-libro-de-lectura.webp?s=1024x1024&w=is&k=20&c=GWV9Qxv3ML17AEJ6EZmR7U7Cvveu0iE4sn33Z0nrd4Q=" alt="User Image" class="user-image">
+                    </div>
+                    <div class="form-fields">
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :nombre %>
+                        <%= form.text_field :nombre, placeholder: "Ingrese nombre...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :apellido %>
+                        <%= form.text_field :apellido, placeholder: "Ingrese apellido...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :descripcion %>
+                        <%= form.text_area :descripcion, placeholder: "Ingrese una descripción...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :email %>
+                        <%= form.email_field :email, placeholder: "Ingrese un email...", class: "form-control" %>
+                      </div>
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :password %>
+                        <%= form.password_field :password, placeholder: "Ingrese una contraseña...", class: "form-control" %>
+                      </div>
+                    </div>  
+                </div>
+              </div>
+              <div class="actions">
+                <%= form.submit "Confirmar", class: "btn btn-confirm btn-color-1" %>
+                <%= link_to 'Cancelar', profile_path, class: "btn btn-cancel btn-color-2" %>
+              </div>
+            <% end %>    
         </div>
     </div>
 </body>
