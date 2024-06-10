@@ -17,7 +17,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-
+    <%= stylesheet_link_tag 'reviews' %>
 </head>
 
 <body id="page-top">
@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Reseñas -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<%= reviews_path %>">
                     <i class="fa-solid fa-star"></i>
                     <span>Reseñas</span></a>
             </li>
@@ -198,9 +198,24 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
-
-                        <p>aca texto basura</p> 
+                    <div class="contenedor">
+                        <% if !@reviews.empty?%>
+                            <% @reviews.each do |review| %>
+                                <div class="card shadow">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary"><%=review.titulo_libro %></p></h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="h6 mb-0 text-800"><%= review.comentario %></p>
+                                    <p class="h6 mb-0 text-800"><%= review.fecha %></p>
+                                    <p class="h6 mb-0 text-800"><%= review.creador %></p>
+                                </div>
+                            </div>
+                            <% end %>
+                        <% else %>
+                        <p> No hay reviews. </p>
+                        <% end %>
 
                     </div>
 

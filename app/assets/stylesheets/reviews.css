@@ -1,0 +1,11 @@
+.contenedor {
+    width: max-content;
+}
+
+.card-body {
+    width: 100%;
+}
+
+.card {
+    margin-bottom: 2em;
+}
