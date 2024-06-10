@@ -8,6 +8,8 @@ class BookDetailsController < ApplicationController
         @@book = api_service.fetch_volume_by_id2(params)
         @book = @@book
         @rating = @@rating
+        # resetea para que si vuelve a entrar no abra el modal directo
+        @@rating = nil
         @lectura = Lectura.new #ver si se puede sacar
         ##Category.find(params[:id])
         session[:book_id] = @@book['id']
@@ -24,7 +26,7 @@ class BookDetailsController < ApplicationController
 
     def create_rating
         # guardo en variable de clase el valor pasado
-        @@rating = params[:rating]
+        @@rating = params[:rating].to_i
         # vuelvo a pagina anterior para mostrar modal
         goBack()
     end

@@ -1,27 +1,45 @@
+<head>
+    <%= stylesheet_link_tag 'create_rating' %>
+</head>
+
 <body>
   <div class="modal fade" id="createRatingModal" tabindex="-1" role="dialog" open="false" aria-labelledby="createRatingModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createRatingModalLabel">Crear Calificación</h5>
-          <a href="<%= reset_rating_path%>" class="btn-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></a>
-        </div>
-        <div class="modal-body">
-          <p> LIBRO PASADO: <%= book_id %></p>
-          <p> RATING PASADO: <%= @rating %></p>
-        </div>
-        <%= form_with(model: Review, url: create_rating_path, local: true) do |form| %>
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="createRatingModalLabel">Crear Calificación</h5>
+    <a href="<%= reset_rating_path%>" class="btn-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="modal-body">
+        <%= form_with(model: Review, url: create_review_path, local: true) do |form| %>
+          <div class="espaciado">
+          <% 1.upto(5) do |value| %>
+            <label for="star_<%= value %>" class="form-check-label">
+            <% if @rating && value <= @rating %>
+                <i class="fa-solid fa-star"></i>
+            <% else %>
+                <i class="fa-regular fa-star"></i>
+            <% end %>
+            <%= radio_button_tag :puntuacion, 
+            value, 
+            class: "form-check-input d-none",
+                checked: @rating == value,
+                id: "star_#{value}" %>
+                </label>
+            <% end %>
+          </div>
           <div class="form-group">
-              <%= form.text_area :comment, 
+              <%= form.text_field :id_libro, 
+              value: book_id,
+              class: "d-none" %>
+              <%= form.text_area :comentario, 
               class: "form-control form-control",
               placeholder: "Comentario" %>
           </div>
         <%= form.submit "Publicar review", 
-        class: "btn btn-primary btn-block" %>
+        class: "btn btn-secondary btn-block" %>
                                           
         <% end %>
-        <div class="modal-footer">
-        <a href="<%= reset_rating_path%>" class="btn btn-secondary">Cancelar</a>
         </div>
       </div>
     </div>
