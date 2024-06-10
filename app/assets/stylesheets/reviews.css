@@ -8,4 +8,18 @@
 
 .card {
     margin-bottom: 2em;
+    width: 95%;
+}
+
+.fila {
+    display: flex;
+    flex-direction: row;
+}
+
+.margen {
+    margin-left: 1em;
+}
+
+.margin-top {
+    margin-top: .5em;
 }

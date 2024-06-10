@@ -1,8 +1,6 @@
 class ReviewsController < ApplicationController
     def reviews
         @reviews = Review.all
-        @usuario = Usuario.find(session[:usuario_id])
-        @reviewsUsuario = Review.count
     end
 
     def create
