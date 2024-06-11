@@ -16,7 +16,7 @@ class LecturasController < ApplicationController
         @search_query = params[:search] || params[:lecture_state] || ""
         if params[:lecture_state].present?
             @lecturas = Lectura.where("lecture_state ilike ?", "%#{@search_query[0]}%")
-        elsif params[:lecture_state].present?
+        elsif params[:search].present?
             @lecturas = Lectura.where("book_title ilike ?", "%#{@search_query}%")
         else
             @lecturas = []
