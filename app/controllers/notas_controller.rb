@@ -24,4 +24,10 @@ class NotasController < ApplicationController
     def nota_params
         params.require(:nota).permit(:lecture_id, :note)
     end
+    def destroy
+        @nota = Nota.find(params[:id])
+        @nota.destroy
+        flash[:success] = "La nota fue exitosamente eliminada"
+        redirect_to details_lectura_path(session[:lecture_id])
+    end
 end
