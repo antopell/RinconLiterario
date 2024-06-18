@@ -55,6 +55,8 @@ gem 'font-awesome-sass', '~> 6.0.0'
 # Http Party para llamadas Http
 gem 'httparty'
 
+gem 'turbolinks', '~> 5'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

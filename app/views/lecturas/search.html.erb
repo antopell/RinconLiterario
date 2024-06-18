@@ -195,6 +195,14 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 ">Biblioteca</h1>
+                        <%= form_with url: lecture_search_path, method: :get, local: true do %>
+                            <div class="input-group">
+                                <%= select :lecture_state,"", ["Por leer", "Leyendo", "Leído", "No finalizado"], { include_blank: true, selected: @search_query }%>
+                                <div class="input-group-append">
+                                    <%= submit_tag "Buscar por estado", class: "btn btn-primary" %>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
 
                     <!-- Content Row -->
@@ -234,7 +242,7 @@
                                             <% if lectura.reading_end_date.present? %>
                                                 <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura:</p> <span><p><%= lectura.reading_end_date %></p></span>
                                             <% end %>
-                                            <%= link_to book_detail_path(lectura['id']), data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Editar lectura<i class="fa-solid fa-pen ml-2"></i></button><% end %>
+                                            <%= link_to details_lectura_path(lectura['id']), class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button">Ver detalles<i class="fa-brands fa-readme ml-2"></i></button><% end %>
                                         </div>
                                     </div>
 
