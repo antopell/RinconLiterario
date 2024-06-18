@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_usuario: 1
+  id_libro: MyString
+  puntuacion: 1
+  fecha: 2024-06-02 20:28:43
+  comentario: MyString
+
+two:
+  id_usuario: 1
+  id_libro: MyString
+  puntuacion: 1
+  fecha: 2024-06-02 20:28:43
+  comentario: MyString

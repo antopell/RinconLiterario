@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   get 'book_search', to: 'books#search'
   get 'confirm_rating', to: 'book_details#confirm_rating', as: 'confirm_rating'
   get 'create_rating', to: 'book_details#create_rating', as: 'create_rating'
+  post 'create_rating', to: 'reviews#create', as: 'create_review'
+  get 'reset_rating', to: 'book_details#reset_rating', as: 'reset_rating'
   get 'save_book', to: 'book_details#save_book', as: 'save_book'
+
+  get 'reviews', to: "reviews#reviews"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
