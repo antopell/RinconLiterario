@@ -24,6 +24,11 @@ class NotasController < ApplicationController
     def nota_params
         params.require(:nota).permit(:lecture_id, :note)
     end
+
+    def details
+        @nota = Nota.find(params[:id])
+    end
+
     def destroy
         @nota = Nota.find(params[:id])
         @nota.destroy

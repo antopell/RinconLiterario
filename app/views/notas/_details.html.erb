@@ -1,0 +1,21 @@
+<!-- app/views/lecturas/update.html.erb -->
+
+<div class="modal fade" id="seeNoteModal" tabindex="-1" aria-labelledby="seeNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="seeNoteModalLabel">Editar lectura</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+        <div class="modal-body">
+          <%= nota.note %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js' %>
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js' %>

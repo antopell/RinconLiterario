@@ -214,12 +214,10 @@
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <!-- Item Reviews -->
+                                    <!-- Item notas -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary">Notas</h6>
+                                            <h3 class="m-0 font-weight-bold text-primary">Notas</h3>
                                             <hr>
                                             <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
                                         </div>
@@ -231,18 +229,20 @@
                                                     <div class="card-body row no-gutters align-items-center">
                                                         <% if @notas.present?%>
                                                             <% @notas.each do |nota| %>
-                                                                <div class="col md-4">
+                                                                <div class="col-lg-5 m-3" style="border-style: outset;">
                                                                     <% if nota.note.length > 200 %>
                                                                         <%= truncate nota.note, length: 200 %>
-                                                                        <%= link_to 'Leer más' %>
+                                                                        <%= link_to details_nota_path(nota), data: { bs_toggle: "modal", bs_target: "#seeNoteModal" } do %><span data-dismiss="modal">Leer más</span><% end %>
                                                                     <% else %>
                                                                         <%= nota.note %>
                                                                     <% end %>
-                                                                    <div class="text-s mb-0 text-gray-800">Fecha: <%= nota.created_at.to_date %></p>
+                                                                    <div class="text-s mb-0 text-gray-800">
+                                                                        <p>Fecha: <%= nota.created_at.to_date %></p>
+                                                                    </div>
                                                                     <%= link_to nota_path(nota), method: :delete, data: { confirm: "¿Estás seguro que querés eliminar la nota?"}, class: "dropdown-item" do %>
                                                                         Eliminar nota <i class="fa-solid fa-trash ml-2"></i> 
                                                                     <% end %>
-
+        
                                                                 </div>
                                                                 <% if @notas.size > 1 %>
                                                                     <!-- Divider -->
@@ -251,12 +251,33 @@
                                                             <%end %>
                                                         <% else %>
                                                             <p>No tiene notas.</p>
-                                                        <% end %> 
-                                                    </div>
+                                                        <% end %>
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Item Log lectura -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
+                                            <h3 class="m-0 font-weight-bold text-primary">Logs de lectura</h3>
+                                            <hr>
+                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar Log de lectura<i class="fa-solid fa-glasses ml-2"></i></button><% end %>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                
+                                                <!-- Tarjetas de reviews -->
+                                                <div class="card shadow h-100 py-2 mb-2">
+                                                    <div class="card-body row no-gutters align-items-center">
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <% else %>
                             <p>No se encontraron libros.</p>
                         <% end %>
