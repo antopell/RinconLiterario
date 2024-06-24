@@ -17,10 +17,14 @@ Rails.application.routes.draw do
   get 'create_rating', to: 'book_details#create_rating', as: 'create_rating'
   get 'save_book', to: 'book_details#save_book', as: 'save_book'
 
+  
+  resources :amigos, only: [:view, :create, :update, :destroy]
   #get 'amigos',to:'amigos#view'
   get 'amigos', to: 'amigos#view'
   get 'amigos/restricted_action', to: 'amigos#restricted_action'
   get 'amigos/public_action', to: 'amigos#public_action'
+  get 'amigos/view/:id', to: 'amigos#view', as: 'view_amigo'
+
 
   get 'notificaciones', to: 'notificaciones#view'
 

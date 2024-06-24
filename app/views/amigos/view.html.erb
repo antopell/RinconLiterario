@@ -17,6 +17,12 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <style>
+    .inline-item {
+        display: block ruby;
+      }
+      
+    </style>
 
 </head>
 
@@ -99,117 +105,96 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search --> <!--
-                    <%= form_with url: library_path, method: :get, local: true do %>
-                        <div class="input-group">
-                            <%= text_field_tag :search, @search_query, class: "form-control bg-light border-0 small", placeholder: "Buscar título..." %>
-                            <div class="input-group-append">
-                                <%= submit_tag "Buscar", class: "btn btn-primary" %>
-                            </div>
-                        </div>
-                    <% end %> -->
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <% if logged_in?%>
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=current_user.username%></span>
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="<profile>">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="edit_user">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-                        <% else %>
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="logIn">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Log in</span>
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                            </li>
-                        <% end %>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
+              <h1 class="h3 mb-0  text-gray-800 ">Mis Amigos</h1>
+              <!-- Topbar Navbar -->
+              <ul class="navbar-nav ml-auto">
+                  <div class="topbar-divider d-none d-sm-block"></div>
+                  <!-- Nav Item - User Information -->
+                  <% if logged_in?%>
+                      <li class="nav-item dropdown no-arrow">
+                          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=current_user.username%></span>
+                              <i class="fa-solid fa-user"></i>
+                          </a>
+                          <!-- Dropdown - User Information -->
+                          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                              aria-labelledby="userDropdown">
+                              <a class="dropdown-item" href="profile">
+                                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Profile
+                              </a>
+                              <a class="dropdown-item" href="edit_user">
+                                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Settings
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Activity Log
+                              </a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Logout
+                              </a>
+                          </div>
+                      </li>
+                  <% else %>
+                      <li class="nav-item dropdown no-arrow">
+                          <a class="nav-link dropdown-toggle" href="logIn">
+                              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Log in</span>
+                              <i class="fa-solid fa-user"></i>
+                          </a>
+                      </li>
+                  <% end %>
+              </ul>
+            </nav>
+            <!-- End of Topbar -->
+  
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 ">Amigos</h1>
-                    </div>
-                    <% if flash[:alert] %>
+                    
+                    <% if flash[:alert] == "Debes iniciar sesión para ver esta página." %>
                         <div class="alert alert-warning">
                             <%= flash[:alert] %>
                             <%= link_to 'Iniciar sesión', logIn_path, class: 'btn btn-primary' %>
                         </div>
+                        <% elsif flash[:alert] %>
+                        <div class="alert alert-warning">
+                            <%= flash[:alert] %>
+                        </div>
                     <% end %>
+
 
                     <%= yield %>
                     <!-- Content Row -->
                     <div class="row">
-                        <!-- aca hay que agregar un if con el resultado que de la
-                        busqueda de amigos, caso contrario aparecera como que no tiene amigos.-->    
-                     
+                   
+                        <% if current_user %>
+                            
+                            <% if @amigos.any? %>
+                                <ul>
+                                <% @amigos.each do |amigo| %>
+                                    <li class="inline-item">
+                                        <%= link_to amigo.username, profile_path(id: amigo.id) %>
+                                        
+                                        <%= form_with(url: amigo_path(current_user.amistades.find_by(amigo: amigo)), method: :delete, local: true, class: 'button_to') do |f| %>
+                                            <%= f.submit 'Eliminar amistad' %>
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                                </ul>
+                            
+                                
+                            <% end %>
+                            <% else %>
+                            <p>Debes iniciar sesión para ver esta página.</p>
+                        <% end %>
+
                     </div>
 
                 </div>

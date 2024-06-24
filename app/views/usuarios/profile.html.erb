@@ -14,6 +14,34 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <style> 
+    .profile-actions {
+      flex: 1;
+     
+  }
+  .button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      color: #fff;
+      
+      cursor: pointer;
+  }
+  
+  .bt-prop{
+    box-shadow: 2px 1px 10px 1px #000000;
+    border-radius: 5px;
+  }
+  .color-button1{
+      background-color: #c44a4a;
+  }
+  .color-button2{
+      background-color: #9C142D;
+  }
+  
+    </style>
 </head>
 
 <body id="page-top">
@@ -199,11 +227,29 @@
             </div>
             <div class="profile-actions">
               <% if @usuario == current_user %>
-                <a href="edit_user"><button class="color-button1 bt-prop">Editar perfil</button></a>
-                <a href="<%= book_search_path %>"><button class="color-button2 bt-prop">Agregar nueva lectura</button></a>
+                <a href="edit_user"><button class="button color-button1 bt-prop">Editar perfil</button></a>
+                <a href="<%= book_search_path %>"><button class="button color-button2 bt-prop">Agregar nueva lectura</button></a>
               <% else %>
-                <a href="#"><button class="color-button1 bt-prop">Agregar a Amigos</button></a>
-              <% end %>  
+                <% if current_user.son_amigos?(@usuario) %>
+                  <!-- Mostrar opciones para amigos -->
+                  <% amistad = current_user.amistades.find_by(amigo: @usuario) %>
+                  <% if amistad %>
+                    <%= form_with(url: amigo_path(amistad), method: :delete, local: true, class: 'button_to') do |form| %>
+                      <%= form.submit "Eliminar Amigo", class: "button color-button2 bt-prop button" %>
+                    <% end %>
+                  <% else %>
+                    <!-- En caso de que por alguna razón no se encuentre la amistad -->
+                    <p>No se encontró la relación de amistad.</p>
+                  <% end %>
+                <% else %>
+                  <!-- Mostrar opción para agregar como amigo -->
+                  <%= form_with(url: amigos_path, method: "post") do |form| %>
+                    <%= form.hidden_field :amigo_id, value: @usuario.id %>
+                    <%= form.submit "Agregar a Amigos", class: "button color-button2 bt-prop" %>
+                  <% end %>
+                <% end %>
+
+              <%end%> 
                 <div class="review-list color-reviews py-3">
                 <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
                 <div class="review-item">
