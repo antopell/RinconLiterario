@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :require_user, only: [:edit_user, :update, :profile]
-  before_action :set_usuario, only: [:edit_user, :update]
+  before_action :set_usuario, only: [:edit_user, :update, :profile]
   def signIn
     @usuario = Usuario.new
   end
@@ -26,10 +26,15 @@ class UsuariosController < ApplicationController
     end
   end
 
+  def profile
+    @lecturas = @usuario.lecturas.order(reading_end_date: :desc).limit(3) # Los últimos 3 libros leídos
+    
+  end
   private
 
   def set_usuario
-    @usuario = Usuario.find(session[:usuario_id])
+    #@usuario = Usuario.find(session[:usuario_id])
+    @usuario = current_user
   end
 
   def usuario_params
