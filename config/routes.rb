@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'edit_user', to:'usuarios#edit_user', as:'edit_user'
   post 'edit_user', to:'usuarios#edit_user'
 
+  get 'users_search', to: 'usuarios#search'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

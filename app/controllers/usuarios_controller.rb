@@ -1,6 +1,7 @@
 class UsuariosController < ApplicationController
   before_action :require_user, only: [:edit_user, :update, :profile]
   before_action :set_usuario, only: [:edit_user, :update, :profile]
+  
   def signIn
     @usuario = Usuario.new
   end
@@ -29,6 +30,16 @@ class UsuariosController < ApplicationController
   def profile
     @lecturas = @usuario.lecturas.order(reading_end_date: :desc).limit(3) # Los últimos 3 libros leídos
     
+  end
+  
+  
+  def search
+    if params[:query].present?
+      @usuarios = Usuario.where("username LIKE ?", "%#{params[:query]}%")
+    else
+      @usuarios = [] 
+    end
+    render :search_us
   end
   private
 
