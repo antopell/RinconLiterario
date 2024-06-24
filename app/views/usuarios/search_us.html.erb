@@ -207,7 +207,9 @@
                         <ul>
                         <% @usuarios.each do |usuario| %>
                             <li>
-                            <%= link_to usuario.username, profile_path(usuario) %> - <%= usuario.mail %>
+                            <%= link_to usuario.username, profile_path(id: usuario.id) %> - <%= usuario.mail %>
+                
+
                             </li>
                         <% end %>
                         </ul>

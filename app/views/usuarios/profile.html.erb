@@ -144,27 +144,37 @@
                 <img src="https://media.istockphoto.com/id/1320406965/es/foto/mujer-silueta-profesor-de-educaci%C3%B3n-libro-de-lectura.webp?s=1024x1024&w=is&k=20&c=GWV9Qxv3ML17AEJ6EZmR7U7Cvveu0iE4sn33Z0nrd4Q=" class="mg-fluid rounded-circle img-profile" alt="Profile Picture">
                 <div class="profile-details">
                 <div class="profile-details">
-                  <h2>
-                  <% if current_user.nombre.present? && !current_user.nombre.strip.empty? %>
-                    <%= current_user.nombre %>
+                  <!-- Mostrar información específica para el usuario actual o por id -->
+                    <% if @usuario == current_user %>
+                      <!-- Mostrar cosas específicas del usuario actual -->
+                      <p class="text-gray-700 mr-4">Este es tu propio perfil.</p>
+                    <% else %>
+                      <!-- Mostrar cosas específicas del perfil de otro usuario -->
+                      <p class="text-gray-700 mr-4">Este es el perfil de <%= @usuario.username %>.</p>
+                    <% end %>  
+                <h2>
+                  <% if @usuario.nombre.present? && !@usuario.nombre.strip.empty? %>
+                    <%= @usuario.nombre %>
                   <% else %>
                     NOMBRE
                   <% end %>
-                  <% if current_user.apellido.present? && !current_user.apellido.strip.empty? %>
-                    <%= current_user.apellido %>
+                  <% if @usuario.apellido.present? && !@usuario.apellido.strip.empty? %>
+                    <%= @usuario.apellido %>
                   <% else %>
-                    APELLIDO
+                    APELLIDO <br>(sin especificar)
                   <% end %>
                   </h2> 
                   <p class="description">Descripción</p>
                   <p class="text-gray-700 mr-4">
-                  <% if current_user.descripcion.present? && !current_user.descripcion.strip.empty? %>
-                    <%= current_user.descripcion %>
+                  <% if @usuario.descripcion.present? && !@usuario.descripcion.strip.empty? %>
+                    <%= @usuario.descripcion %>
                   <% else %>
                     (debes agregar tu descripción)
                   <% end %>
                   </p>
+                  
                 </div>
+                
                 <div class="book-list">
                   <h3 class="font-weight-bold title-reviews">Últimos libros leídos</h3><br>
                   <% if @lecturas.present?%>
@@ -188,8 +198,12 @@
               </div>
             </div>
             <div class="profile-actions">
+              <% if @usuario == current_user %>
                 <a href="edit_user"><button class="color-button1 bt-prop">Editar perfil</button></a>
                 <a href="<%= book_search_path %>"><button class="color-button2 bt-prop">Agregar nueva lectura</button></a>
+              <% else %>
+                <a href="#"><button class="color-button1 bt-prop">Agregar a Amigos</button></a>
+              <% end %>  
                 <div class="review-list color-reviews py-3">
                 <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
                 <div class="review-item">

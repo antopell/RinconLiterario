@@ -45,7 +45,12 @@ class UsuariosController < ApplicationController
 
   def set_usuario
     #@usuario = Usuario.find(session[:usuario_id])
-    @usuario = current_user
+    #@usuario = current_user
+    if params[:id].present?
+      @usuario = Usuario.find(params[:id])
+    else
+      @usuario = current_user
+    end
   end
 
   def usuario_params
