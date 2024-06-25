@@ -1,18 +1,19 @@
 class Review < ApplicationRecord
 
-    validates :id_usuario, presence: true
+    belongs_to :usuario
+
     validates :comentario, presence: true
     validates :puntuacion, presence: true
-    validates :id_libro, presence: true
+    validates :libro_id, presence: true
 
     def titulo_libro
         api_service = ExternalApiService.new()
-        book = api_service.fetch_volume_by_id2(id: id_libro)
+        book = api_service.fetch_volume_by_id2(id: libro_id)
         book['volumeInfo']['title']
-        
+
     end
 
     def creador
-        Usuario.find(id_usuario).username
+        Usuario.find(usuario_id).username
     end
 end
