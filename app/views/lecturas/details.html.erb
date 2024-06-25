@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Buscar -->
             <li class="nav-item">
-                <a class="nav-link" href="<%= book_search_path %>">
+                <a class="nav-link" href="<%= book_search_path%>">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span>Buscar</span></a>
             </li>
@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Reseñas -->
             <li class="nav-item">
-                <a class="nav-link" href="<%= reviews_path %>">
+                <a class="nav-link" href="index.html">
                     <i class="fa-solid fa-star"></i>
                     <span>Reseñas</span></a>
             </li>
@@ -71,7 +71,7 @@
 
             <!-- Nav Item - Amigos -->
             <li class="nav-item">
-                <a class="nav-link" href="<%=amigos_path %>">
+                <a class="nav-link" href="index.html">
                     <i class="fa-solid fa-user-group"></i>
                     <span>Amigos</span></a>
             </li>
@@ -81,7 +81,7 @@
 
             <!-- Nav Item - Notificaciones -->
             <li class="nav-item">
-                <a class="nav-link" href="<%=notificaciones_path %>">
+                <a class="nav-link" href="index.html">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notificaciones</span></a>
             </li>
@@ -105,16 +105,6 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <%= form_with url: lecture_search_path, method: :get, local: true do %>
-                        <div class="input-group">
-                            <%= text_field_tag :search, @search_query, class: "form-control bg-light border-0 small", placeholder: "Buscar título..." %>
-                            <div class="input-group-append">
-                                <%= submit_tag "Buscar", class: "btn btn-primary" %>
-                            </div>
-                        </div>
-                    <% end %>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -156,11 +146,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="profile">
+                                    <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href="edit_user">
+                                    <a class="dropdown-item" href="#">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Settings
                                     </a>
@@ -175,13 +165,6 @@
                                     </a>
                                 </div>
                             </li>
-                        <% else %>
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="logIn">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Log in</span>
-                                    <i class="fa-solid fa-user"></i>
-                                </a>
-                            </li>
                         <% end %>
 
                     </ul>
@@ -194,66 +177,89 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 ">Biblioteca</h1>
-                        <%= form_with url: lecture_search_path, method: :get, local: true do %>
-                            <div class="input-group">
-                                <%= select :lecture_state, "", ["Por leer", "Leyendo", "Leído", "No finalizado"], { include_blank: true, selected: @search_query }%>
-                                <div class="input-group-append">
-                                    <%= submit_tag "Buscar por estado", class: "btn btn-primary" %>
-                                </div>
-                            </div>
-                        <% end %>
+                        <h1 class="h3 mb-0 ">Detalles de la lectura</h1>
                     </div>
 
                     <%= render 'layouts/messages' %>
+
                     <!-- Content Row -->
                     <div class="row">
 
-                        <% if @lecturas.present?%>
-                            <% @lecturas.each do |lectura| %>
-                                <div class="col-lg-3 mb-4">
+                        <% if @lectura.present? %>
+                                <div class="col-lg-8 mb-4">
 
                                     <!-- Item libro -->
                                     <div class="card shadow mb-4">
-                                        <!-- Card Header - Dropdown -->
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h6 class="m-0 font-weight-bold text-primary"><%=lectura.book_title %></p></h6>
-                                            <div class="dropdown no-arrow">
-                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                    aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Acciones:</div>
-                                                    <a class="dropdown-item" href="<%= book_detail_path(lectura.book_id) %>">Abrir detalles del libro</a>
-                                                    <%= link_to "Eliminar lectura", lectura_path(lectura), method: :delete, 
-                                                    data: { confirm: "¿Estás seguro que querés eliminar la lectura?"}, class: "dropdown-item" %>
-                                                </div>
-                                            </div>
+                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
+                                            <h3 class="m-0 font-weight-bold text-primary"><%=@lectura.book_title %></p></h6>
+                                            <hr>
+                                            <%= link_to new_lectura_path, data: { bs_toggle: "modal", bs_target: "#updateLecturaModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Editar lectura<i class="fa-solid fa-pen ml-2"></i></button><% end %>
                                         </div>
                                         <div class="card-body">
-                                            <div class="text-center">
-                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                                    src="<%= lectura.book_img %>" alt="...">
+                                            <div class="text-center" style="text-align-last: left; display: inline-flex;">
+                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 287px; height: auto;"
+                                                    src="<%= @lectura.book_img %>" alt="...">
+                                                <div style="align-content: center;">
+                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Estado de lectura: </p> <span><p><%= @lectura.lecture_state %></p></span>
+                                                    <% if @lectura.reading_start_date.present? %>
+                                                        <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de inicio de lectura: </p> <span><p><%= @lectura.reading_start_date %></p></span>
+                                                    <% end %>
+                                                    <% if @lectura.reading_end_date.present? %>
+                                                        <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura: </p> <span><p><%= @lectura.reading_end_date %></p></span>
+                                                    <% end %>
+                                                    <a target="_blank" rel="nofollow" href="<%= book_detail_path(@lectura.book_id)%>">Ver más detalles del libro &rarr;</a>
+                                                </div>
+                              
                                             </div>
-                                            <p class="h6 mb-0 font-weight-bold text-gray-800">Estado de lectura:</p> <span><p><%= lectura.lecture_state %></p></span>
-                                            <% if lectura.reading_start_date.present? %>
-                                                <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de inicio de lectura:</p> <span><p><%= lectura.reading_start_date %></p></span>
-                                            <% end %>
-                                            <% if lectura.reading_end_date.present? %>
-                                                <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura:</p> <span><p><%= lectura.reading_end_date %></p></span>
-                                            <% end %>
-                                            <%= link_to details_lectura_path(lectura['id']), class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button">Ver detalles<i class="fa-brands fa-readme ml-2"></i></button><% end %>
                                         </div>
                                     </div>
 
                                 </div>
-                            <%end %>
-                        <% else %>
-                            <p>No tiene lecturas.</p>
-                        <% end %>    
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Item Reviews -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
+                                            <h3 class="m-0 font-weight-bold text-primary">Notas</h6>
+                                            <hr>
+                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                
+                                                <!-- Tarjetas de reviews -->
+                                                <div class="card shadow h-100 py-2 mb-2">
+                                                    <div class="card-body row no-gutters align-items-center">
+                                                        <% if @notas.present?%>
+                                                            <% @notas.each do |nota| %>
+                                                                <div class="col md-4">
+                                                                    <% if nota.note.length > 200 %>
+                                                                        <%= truncate nota.note, length: 200 %>
+                                                                        <%= link_to 'Leer más' %>
+                                                                    <% else %>
+                                                                        <%= nota.note %>
+                                                                    <% end %>
+                                                                    <div class="text-s mb-0 text-gray-800">Fecha: <%= nota.created_at.to_date %></p>
+                                                                    <%= link_to nota_path(nota), method: :delete, data: { confirm: "¿Estás seguro que querés eliminar la nota?"}, class: "dropdown-item" do %>
+                                                                        Eliminar nota <i class="fa-solid fa-trash ml-2"></i> 
+                                                                    <% end %>
 
+                                                                </div>
+                                                                <% if @notas.size > 1 %>
+                                                                    <!-- Divider -->
+                                                                    <hr class="sidebar-divider">
+                                                                <%end %>
+                                                            <%end %>
+                                                        <% else %>
+                                                            <p>No tiene notas.</p>
+                                                        <% end %> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <% else %>
+                            <p>No se encontraron libros.</p>
+                        <% end %>
                     </div>
 
                 </div>
@@ -278,6 +284,14 @@
     </div>
     <!-- End of Page Wrapper -->
 
+
+    
+    <!-- Modal Editar Lectura -->
+    <%= render 'lecturas/update' %>
+    <!-- Modal Agregar libro -->
+    <%= render 'notas/new' %>
+
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -289,14 +303,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Deséas cerrar tu sesión?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <%= button_to "Log out", log_out_path, method: :delete, class: "btn btn-primary" %>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>

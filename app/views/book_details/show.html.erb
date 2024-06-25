@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Reseñas -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<%= reviews_path %>">
                     <i class="fa-solid fa-star"></i>
                     <span>Reseñas</span></a>
             </li>
@@ -179,6 +179,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 ">Detalles del libro</h1>
                     </div>
+                    <%= render 'layouts/messages' %>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -189,7 +190,7 @@
                                     <!-- Item libro -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></p></h6>
+                                            <h3 class="m-0 font-weight-bold text-primary"><%=@book['volumeInfo']['title'] %></h3>
                                             <hr>
                                             <%= link_to new_lectura_path, data: { bs_toggle: "modal", bs_target: "#saveBookModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Guardar libro<i class="fa-solid fa-plus ml-2"></i></button><% end %>
                                         </div>
@@ -223,10 +224,20 @@
                                                     <% end %>
                                                     <p class="h6 mb-0 font-weight-bold text-gray-800">Calificar</p> 
                                                     <div style="display: inline-flex;">
-                                                        <% 1.upto(5) do |i| %>
-                                                            <%= link_to confirm_rating_path(rating: i), data: { bs_toggle: "modal", bs_target: "#confirmRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %>
-                                                                <i class="fa-regular fa-star"></i>
-                                                            <% end %>
+                                                        <%= form_with url: create_rating_path, method: :get do |form| %>
+                                                            <div class="form-group">
+                                                                <% 1.upto(5) do |value| %>
+                                                                    <label for="star_<%= value %>" class="form-check-label">
+                                                                    <i class="fa-regular fa-star text-success"></i>
+                                                                    <%= radio_button_tag :rating, 
+                                                                    value, 
+                                                                    class: "form-check-input d-none",
+                                                                        checked: false,
+                                                                        id: "star_#{value}",
+                                                                        onclick: "form.submit()"%>
+                                                                        </label>
+                                                                <% end %>
+                                                            </div>
                                                         <% end %>
                                                     </div>
                                                 </div>
@@ -243,7 +254,11 @@
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
                                             <h3 class="m-0 font-weight-bold text-primary">Reseñas</h6>
                                             <hr>
-                                            <%= link_to create_rating_path(@book['id']), data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Crear reseña<i class="fa-solid fa-star ml-2"></i></button><% end %>
+                                            <%= link_to create_rating_path, 
+                                                data: { bs_toggle: "modal", bs_target: "#createRatingModal" }, 
+                                                class: "btn btn-secondary ml-2 mr-2" do %>
+                                                    Crear reseña<i class="fa-solid fa-star ml-2"></i>
+                                            <% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
@@ -310,12 +325,13 @@
 
 
     
-    <!-- Modal Rating estrellas -->
-    <%= render 'book_details/confirm_rating' %>
+    <!-- Modal Rating estrellas 
+    <%= render 'book_details/confirm_rating' %>-->
     <!-- Modal crear reseña -->
-    <%= render 'book_details/create_rating' %>
+    <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id']}%>
     <!-- Modal Agregar libro -->
     <%= render 'lecturas/new' %>
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -345,7 +361,7 @@
     
     <!-- Core plugin JavaScript
     <%= javascript_include_tag 'jquery.easing.min' %>-->
-
+    
     <!-- Bootstrap core JavaScript-->
     <%= javascript_include_tag 'jquery.min.js' %>
     <%= javascript_include_tag 'bootstrap.bundle.min' %>
@@ -353,6 +369,12 @@
     <!-- Custom scripts for all pages-->
     <%= javascript_include_tag 'sb-admin-2.min' %>
 
+
+    <% if @rating %>                                                                  
+        <script>
+            $('#createRatingModal').modal('show');
+        </script>
+    <% end %> 
 </body>
 
 </html>
