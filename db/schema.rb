@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_09_210417) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "id_usuario"
+    t.string "usuario_id"
     t.string "id_libro"
     t.integer "puntuacion"
     t.datetime "fecha"
@@ -49,6 +49,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_09_210417) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "usuario_id"
+    t.index ["usuario_id"], name: "index_usuarios_on_usuario_id"
   end
 
+  add_foreign_key "usuarios", "usuarios"
 end

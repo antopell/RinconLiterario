@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
 
-    validates :id_usuario, presence: true
+    belongs_to :usuario
+
     validates :comentario, presence: true
     validates :puntuacion, presence: true
     validates :id_libro, presence: true
