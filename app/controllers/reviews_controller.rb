@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
         Rails.logger.debug "datos:"
         Rails.logger.debug @usuarioActual
         Rails.logger.debug review_params
-        @review = @usuarioActual.review.create(review_params)
+        @review = @usuarioActual.reviews.create(review_params)
         Rails.logger.debug @review
         if (@review.save)
             flash[:success] = "Se creo exitosamente la review"
