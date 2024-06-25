@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  
   resources :book_details
   resources :lecturas, only: [:new, :create, :destroy, :update] do
     member do
@@ -21,6 +23,26 @@ Rails.application.routes.draw do
   post 'create_rating', to: 'reviews#create', as: 'create_review'
   get 'reset_rating', to: 'book_details#reset_rating', as: 'reset_rating'
   get 'save_book', to: 'book_details#save_book', as: 'save_book'
+
+  
+  resources :amigos, only: [:view, :create, :update, :destroy]
+  #get 'amigos',to:'amigos#view'
+  get 'amigos', to: 'amigos#view'
+  get 'amigos/restricted_action', to: 'amigos#restricted_action'
+  get 'amigos/public_action', to: 'amigos#public_action'
+  get 'amigos/view/:id', to: 'amigos#view', as: 'view_amigo'
+
+
+  get 'notificaciones', to: 'notificaciones#view'
+
+  # Rutas RESTful para usuarios (incluyendo edit y update)
+  resources :usuarios, only: [:edit, :update]
+
+  get 'profile', to:'usuarios#profile', as:'profile'
+  get 'edit_user', to:'usuarios#edit_user', as:'edit_user'
+  post 'edit_user', to:'usuarios#edit_user'
+
+  get 'users_search', to: 'usuarios#search'
 
   get 'reviews', to: "reviews#reviews"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

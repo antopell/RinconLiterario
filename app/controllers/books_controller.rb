@@ -38,12 +38,16 @@ class BooksController < ApplicationController
 
     def search
         @search_query = params[:search] || ""
-        if @search_query.present?
+        @search_type = params[:search_type] || "books"
+    
+        case @search_type
+        when "books"
           get_books(@search_query)
-        else
-          @books = []
+        when "users"
+          @users = Usuario.where("username LIKE ?", "%#{@search_query}%")
         end
+    
         my_books
-    end
+      end
 
 end

@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.1].define(version: 2024_06_25_004303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "amistads", force: :cascade do |t|
+    t.integer "usuario_id"
+    t.integer "amigo_id"
+    t.string "estado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lecturas", force: :cascade do |t|
     t.string "username"
@@ -50,6 +59,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_004303) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nombre"
+    t.string "apellido"
+    t.text "descripcion"
+    t.string "email"
   end
 
   add_foreign_key "reviews", "usuarios"

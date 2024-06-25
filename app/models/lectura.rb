@@ -1,4 +1,5 @@
 class Lectura < ApplicationRecord
+    belongs_to :usuario, foreign_key: :username, primary_key: :username
 
     validates :username, presence: true
     validates :book_id, presence: true, uniqueness: true
@@ -9,3 +10,5 @@ class Lectura < ApplicationRecord
     validates :reading_end_date, presence: false
 
 end
+
+  
