@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
         Rails.logger.debug "datos:"
         Rails.logger.debug @usuarioActual
         Rails.logger.debug review_params
-        @review = @usuarioActual.reviews.create(review_params)
+        @review = @usuarioActual.review.create(review_params)
         Rails.logger.debug @review
         if (@review.save)
             flash[:success] = "Se creo exitosamente la review"
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     end
 
     def review_params
-        params.require(:review).permit(:id_libro, :comentario, :puntuacion)
+        params.require(:review).permit(:libro_id, :comentario, :puntuacion)
                                 .merge(fecha: Date.today)
                                 .merge(puntuacion: params[:puntuacion].to_i)
     end
