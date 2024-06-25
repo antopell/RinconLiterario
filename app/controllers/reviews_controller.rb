@@ -5,16 +5,10 @@ class ReviewsController < ApplicationController
 
     def create
         @usuarioActual = Usuario.find(session[:usuario_id])
-        Rails.logger.debug "datos:"
-        Rails.logger.debug @usuarioActual
-        Rails.logger.debug review_params
         @review = @usuarioActual.reviews.create(review_params)
-        Rails.logger.debug @review
         if (@review.save)
             flash[:success] = "Se creo exitosamente la review"
         else
-            Rails.logger.debug "Errores review:"
-            Rails.logger.debug @review.errors.full_messages
             flash[:danger] = @review.errors.full_messages[0]
         end
         goBack
