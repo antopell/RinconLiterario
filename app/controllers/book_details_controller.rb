@@ -15,6 +15,7 @@ class BookDetailsController < ApplicationController
         session[:book_id] = @@book['id']
         session[:book_title] = @@book['volumeInfo']['title']
         session[:book_img] = @@book['volumeInfo']['imageLinks'].present? ? @@book['volumeInfo']['imageLinks']['thumbnail']: "https://d3525k1ryd2155.cloudfront.net/h/848/258/116258848.0.m.jpg"
+        session[:total_pages] = @@book['volumeInfo']['pageCount']
     end
 
     def confirm_rating

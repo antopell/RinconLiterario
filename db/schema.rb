@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_221529) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_023149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_221529) do
     t.datetime "updated_at", null: false
     t.string "book_title"
     t.string "book_img"
+    t.integer "total_pages"
   end
 
   create_table "logs_lecturas", force: :cascade do |t|
@@ -42,8 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_221529) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "id_usuario"
-    t.string "id_libro"
+    t.string "libro_id"
     t.integer "puntuacion"
     t.datetime "fecha"
     t.string "comentario"
@@ -57,6 +57,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_221529) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nombre"
+    t.string "apellido"
+    t.text "descripcion"
+    t.string "email"
   end
 
 end

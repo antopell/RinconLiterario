@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
   end
   resources :notas
+  resources :logs_lecturas, only: [:index, :new, :create, :destroy]
   root 'landing_page#index'
 
   get 'signIn', to: "usuarios#signIn"
