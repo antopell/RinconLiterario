@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Perfil de Usuario</title>
+    <!-- Custom fonts for this template-->
+        <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <style> 
+    .profile-actions {
+      flex: 1;
+     
+  }
+  .button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      color: #fff;
+      
+      cursor: pointer;
+  }
+  
+  .bt-prop{
+    box-shadow: 2px 1px 10px 1px #000000;
+    border-radius: 5px;
+  }
+  .color-button1{
+      background-color: #c44a4a;
+  }
+  .color-button2{
+      background-color: #9C142D;
+  }
+  
+    </style>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-primary sidebar accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= root_path()%>">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Rincón Literario</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Biblioteca -->
+        <li class="nav-item active">
+            <a class="nav-link" href="<%= library_path%>">
+                <i class="fa-solid fa-book"></i>
+                <span>Biblioteca</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Buscar -->
+        <li class="nav-item">
+            <a class="nav-link" href="<%= book_search_path %>">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Buscar</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Reseñas -->
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">
+                <i class="fa-solid fa-star"></i>
+                <span>Reseñas</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Amigos -->
+        <li class="nav-item">
+            <a class="nav-link" href="<%=amigos_path %>">
+                <i class="fa-solid fa-user-group"></i>
+                <span>Amigos</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Notificaciones -->
+        <li class="nav-item">
+            <a class="nav-link" href="<%=notificaciones_path %>">
+                <i class="fa-solid fa-bell"></i>
+                <span>Notificaciones</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+    </ul>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow profile-color">
+            <h1 class="h3 mb-0  text-gray-800 ">Perfil</h1>
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <!-- Nav Item - User Information -->
+                <% if logged_in?%>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=current_user.username%></span>
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="profile">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="edit_user">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                <% else %>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="logIn">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Log in</span>
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                <% end %>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <div class="profile-content">
+              <div class="profile-info">  
+                <img src="https://media.istockphoto.com/id/1320406965/es/foto/mujer-silueta-profesor-de-educaci%C3%B3n-libro-de-lectura.webp?s=1024x1024&w=is&k=20&c=GWV9Qxv3ML17AEJ6EZmR7U7Cvveu0iE4sn33Z0nrd4Q=" class="mg-fluid rounded-circle img-profile" alt="Profile Picture">
+                <div class="profile-details">
+                <div class="profile-details">
+                  <!-- Mostrar información específica para el usuario actual o por id -->
+                    <% if @usuario == current_user %>
+                      <!-- Mostrar cosas específicas del usuario actual -->
+                      <p class="text-gray-700 mr-4">Este es tu propio perfil.</p>
+                    <% else %>
+                      <!-- Mostrar cosas específicas del perfil de otro usuario -->
+                      <p class="text-gray-700 mr-4">Este es el perfil de <%= @usuario.username %>.</p>
+                    <% end %>  
+                <h2>
+                  <% if @usuario.nombre.present? && !@usuario.nombre.strip.empty? %>
+                    <%= @usuario.nombre %>
+                  <% else %>
+                    NOMBRE
+                  <% end %>
+                  <% if @usuario.apellido.present? && !@usuario.apellido.strip.empty? %>
+                    <%= @usuario.apellido %>
+                  <% else %>
+                    APELLIDO <br>(sin especificar)
+                  <% end %>
+                  </h2> 
+                  <p class="description">Descripción</p>
+                  <p class="text-gray-700 mr-4">
+                  <% if @usuario.descripcion.present? && !@usuario.descripcion.strip.empty? %>
+                    <%= @usuario.descripcion %>
+                  <% else %>
+                    (debes agregar tu descripción)
+                  <% end %>
+                  </p>
+                  
+                </div>
+                
+                <div class="book-list">
+                  <h3 class="font-weight-bold title-reviews">Últimos libros leídos</h3><br>
+                  <% if @lecturas.present?%>
+                      <% @lecturas.each do |lectura| %>
+                        <div class="book-item text-gray-700">
+                          <div class="book-info">
+                            <p class="h6 mb-0 font-weight-bold text-gray-800" >Titulo del libro: <%=lectura.book_title %></p>
+                            <p class="h6 mb-1  text-gray-700">Estado de lectura:<%= lectura.lecture_state %></p>
+                           
+                          
+                            </div>
+                        </div>   
+                      <%end %>
+                  <% else %>
+                      <p>No tiene lecturas.</p>
+                  <% end %>
+                        
+                  
+                  
+                </div>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <% if @usuario == current_user %>
+                <a href="edit_user"><button class="button color-button1 bt-prop">Editar perfil</button></a>
+                <a href="<%= book_search_path %>"><button class="button color-button2 bt-prop">Agregar nueva lectura</button></a>
+              <% else %>
+                <% if current_user.son_amigos?(@usuario) %>
+                  <!-- Mostrar opciones para amigos -->
+                  <% amistad = current_user.amistades.find_by(amigo: @usuario) %>
+                  <% if amistad %>
+                    <%= form_with(url: amigo_path(amistad), method: :delete, local: true, class: 'button_to') do |form| %>
+                      <%= form.submit "Eliminar Amigo", class: "button color-button2 bt-prop button" %>
+                    <% end %>
+                  <% else %>
+                    <!-- En caso de que por alguna razón no se encuentre la amistad -->
+                    <p>No se encontró la relación de amistad.</p>
+                  <% end %>
+                <% else %>
+                  <!-- Mostrar opción para agregar como amigo -->
+                  <%= form_with(url: amigos_path, method: "post") do |form| %>
+                    <%= form.hidden_field :amigo_id, value: @usuario.id %>
+                    <%= form.submit "Agregar a Amigos", class: "button color-button2 bt-prop" %>
+                  <% end %>
+                <% end %>
+
+              <%end%> 
+                <div class="review-list color-reviews py-3">
+                <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
+                <div class="review-item">
+                    <div class="review-info text-gray-700">
+                        <p>Título de libro</p>
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-gray-500">Descripción de la reseña.</p>
+                    </div>
+                </div>
+                <div class="review-item">
+                    <div class="review-info text-gray-700">
+                        <p>Título de libro</p>
+                        <div class="stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="text-gray-500">Descripción de la reseña.</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container mt-3 mb-3" style="height: 10px;">
+                <div class="copyright text-center mt-3 mb-3">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">¿Deséas cerrar tu sesión?</h5>
+                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                  <%= button_to "Log out", log_out_path, method: :delete, class: "btn btn-primary" %>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  
+  <!-- Core plugin JavaScript
+  <%= javascript_include_tag 'jquery.easing.min' %>-->
+
+  <!-- Bootstrap core JavaScript-->
+  <%= javascript_include_tag 'jquery.min.js' %>
+  <%= javascript_include_tag 'bootstrap.bundle.min' %>
+  
+  <!-- Custom scripts for all pages-->
+  <%= javascript_include_tag 'sb-admin-2.min' %>
+
+</body>
+
+</html>

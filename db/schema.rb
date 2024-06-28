@@ -14,6 +14,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_023149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amistades", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.integer "amigo_id", null: false
+    t.string "estado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amigo_id"], name: "index_amistades_on_amigo_id"
+    t.index ["usuario_id", "amigo_id"], name: "index_amistades_on_usuario_id_and_amigo_id", unique: true
+    t.index ["usuario_id"], name: "index_amistades_on_usuario_id"
+  end
+
   create_table "lecturas", force: :cascade do |t|
     t.string "username"
     t.string "book_id"
@@ -49,6 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_023149) do
     t.string "comentario"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "usuario_id", null: false
+    t.index ["usuario_id"], name: "index_reviews_on_usuario_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -63,4 +76,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_023149) do
     t.string "email"
   end
 
+  add_foreign_key "reviews", "usuarios"
 end

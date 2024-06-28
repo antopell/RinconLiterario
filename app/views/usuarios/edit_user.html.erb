@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Perfil de Usuario</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fc;
+        }
+        #wrapper {
+            display: flex;
+        }
+        #sidebar {
+            background-color: #98bf64;
+            padding: 10px;
+            width: 200px;
+        }
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            margin: 15px 0;
+        }
+        #sidebar ul li a {
+            color: #000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        #sidebar ul li a i {
+            margin-right: 10px;
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+        #profile-header {
+            background-color: #f08867;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #profile-header h1 {
+            margin: 0;
+            color: #fff;
+        }
+        #profile-header .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        #profile-header .profile-picture img {
+            width: 100%;
+            height: auto;
+        }
+
+        .profile-color{
+            background-color: #F19C79;
+        }
+        .flex-container {
+          display: flex;
+        }
+
+        .image-container {
+          flex: 0 0 auto; 
+          margin-right: 60px;
+        }
+
+        .form-fields {
+          flex: 1 1 auto;
+        }
+
+        .user-image {
+          max-width: 200px;
+        }
+        .form-control{
+          background-color:#EDD3D3;
+          width: 60%;
+          border: none;
+        }
+        .btn-color-1{
+          background-color:#9C142D
+          color: antiquewhite;
+        }
+        .btn-color-2{
+          background-color:#E76369
+          color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-primary sidebar accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= root_path %>">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Rincón Literario</div>
+      </a>
+      <hr class="sidebar-divider">
+      <li class="nav-item active">
+        <a class="nav-link" href="<%= library_path %>">
+          <i class="fa-solid fa-book"></i>
+          <span>Biblioteca</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= book_search_path %>">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Buscar</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= amigos_path %>">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Amigos</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="<%= notificaciones_path %>">
+          <i class="fa-solid fa-bell"></i>
+          <span>Notificaciones</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+    </ul>
+    <!-- End of Sidebar -->
+<!-- Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow profile-color">
+            <h1 class="h3 mb-0  text-gray-800 ">Perfil</h1>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                  <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                      <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <% if logged_in? %>
+                  <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= current_user.username %></span>
+                      <i class="fa-solid fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="profile">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </a>
+                      <a class="dropdown-item" href="edit_user">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </nav>
+            <hr class="sidebar-divider">
+            <!-- End of Topbar -->
+            <!-- User Edit Content -->
+            <%= form_with(model: @usuario, local: true) do |form| %>
+              <% if @usuario.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this user from being saved:</h2>
+            
+                  <ul>
+                    <% @usuario.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            
+              <div class="form-group">
+                <div class="flex-container">
+                    <div class="image-container">
+                      <img src="https://media.istockphoto.com/id/1320406965/es/foto/mujer-silueta-profesor-de-educaci%C3%B3n-libro-de-lectura.webp?s=1024x1024&w=is&k=20&c=GWV9Qxv3ML17AEJ6EZmR7U7Cvveu0iE4sn33Z0nrd4Q=" alt="User Image" class="user-image">
+                    </div>
+                    <div class="form-fields">
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :nombre %>
+                        <%= form.text_field :nombre, placeholder: "Ingrese nombre...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :apellido %>
+                        <%= form.text_field :apellido, placeholder: "Ingrese apellido...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :descripcion %>
+                        <%= form.text_area :descripcion, placeholder: "Ingrese una descripción...", class: "form-control" %>
+                      </div>
+                    
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :email %>
+                        <%= form.email_field :email, placeholder: "Ingrese un email...", class: "form-control" %>
+                      </div>
+                      <div class="form-group font-weight-bold ">
+                        <%= form.label :password %>
+                        <%= form.password_field :password, placeholder: "Ingrese una contraseña...", class: "form-control" %>
+                      </div>
+                    </div>  
+                </div>
+              </div>
+              <div class="actions">
+                <%= form.submit "Confirmar", class: "btn btn-confirm btn-color-1" %>
+                <%= link_to 'Cancelar', profile_path, class: "btn btn-cancel btn-color-2" %>
+              </div>
+            <% end %>    
+        </div>
+    </div>
+</body>
+</html>

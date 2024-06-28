@@ -71,7 +71,7 @@
 
             <!-- Nav Item - Amigos -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<%=amigos_path %>">
                     <i class="fa-solid fa-user-group"></i>
                     <span>Amigos</span></a>
             </li>
@@ -81,7 +81,7 @@
 
             <!-- Nav Item - Notificaciones -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<%=notificaciones_path %>">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notificaciones</span></a>
             </li>
@@ -146,11 +146,11 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="profile">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="edit_user">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Settings
                                     </a>
@@ -179,6 +179,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 ">Detalles del libro</h1>
                     </div>
+                    <%= render 'layouts/messages' %>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -330,6 +331,7 @@
     <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id']}%>
     <!-- Modal Agregar libro -->
     <%= render 'lecturas/new' %>
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

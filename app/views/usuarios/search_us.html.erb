@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Rincon literario libreria</title>
+    <title>busqueda de usuario</title>
 
     <!-- Custom fonts for this template-->
         <link
@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Buscar -->
             <li class="nav-item">
-                <a class="nav-link" href="<%= book_search_path %>">
+                <a class="nav-link" href="<%= book_search_path%>">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span>Buscar</span></a>
             </li>
@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Reseñas -->
             <li class="nav-item">
-                <a class="nav-link" href="<%= reviews_path %>">
+                <a class="nav-link" href="index.html">
                     <i class="fa-solid fa-star"></i>
                     <span>Reseñas</span></a>
             </li>
@@ -107,14 +107,15 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <%= form_with url: lecture_search_path, method: :get, local: true do %>
+                    <%= form_with url: users_search_path, method: :get, local: true do %>
                         <div class="input-group">
-                            <%= text_field_tag :search, @search_query, class: "form-control bg-light border-0 small", placeholder: "Buscar título..." %>
+                            <input type="text" name="query" class= "form-control bg-light border-0 small" placeholder="Buscar usuarioss">
                             <div class="input-group-append">
                                 <%= submit_tag "Buscar", class: "btn btn-primary" %>
                             </div>
                         </div>
                     <% end %>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -194,66 +195,28 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 ">Biblioteca</h1>
-                        <%= form_with url: lecture_search_path, method: :get, local: true do %>
-                            <div class="input-group">
-                                <%= select :lecture_state, "", ["Por leer", "Leyendo", "Leído", "No finalizado"], { include_blank: true, selected: @search_query }%>
-                                <div class="input-group-append">
-                                    <%= submit_tag "Buscar por estado", class: "btn btn-primary" %>
-                                </div>
-                            </div>
-                        <% end %>
+                        <h1 class="h3 mb-0 ">Resultados de la búsqueda</h1>
                     </div>
 
-                    <%= render 'layouts/messages' %>
                     <!-- Content Row -->
                     <div class="row">
 
-                        <% if @lecturas.present?%>
-                            <% @lecturas.each do |lectura| %>
-                                <div class="col-lg-3 mb-4">
+                   
 
-                                    <!-- Item libro -->
-                                    <div class="card shadow mb-4">
-                                        <!-- Card Header - Dropdown -->
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h6 class="m-0 font-weight-bold text-primary"><%=lectura.book_title %></p></h6>
-                                            <div class="dropdown no-arrow">
-                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                    aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Acciones:</div>
-                                                    <a class="dropdown-item" href="<%= book_detail_path(lectura.book_id) %>">Abrir detalles del libro</a>
-                                                    <%= link_to "Eliminar lectura", lectura_path(lectura), method: :delete, 
-                                                    data: { confirm: "¿Estás seguro que querés eliminar la lectura?"}, class: "dropdown-item" %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 220px; height: auto;"
-                                                    src="<%= lectura.book_img %>" alt="...">
-                                            </div>
-                                            <p class="h6 mb-0 font-weight-bold text-gray-800">Estado de lectura:</p> <span><p><%= lectura.lecture_state %></p></span>
-                                            <% if lectura.reading_start_date.present? %>
-                                                <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de inicio de lectura:</p> <span><p><%= lectura.reading_start_date %></p></span>
-                                            <% end %>
-                                            <% if lectura.reading_end_date.present? %>
-                                                <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura:</p> <span><p><%= lectura.reading_end_date %></p></span>
-                                            <% end %>
-                                            <%= link_to details_lectura_path(lectura['id']), class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button">Ver detalles<i class="fa-brands fa-readme ml-2"></i></button><% end %>
-                                        </div>
-                                    </div>
+                    <% if @usuarios.any? %>
+                        <ul>
+                        <% @usuarios.each do |usuario| %>
+                            <li>
+                            <%= link_to usuario.username, profile_path(id: usuario.id) %> - <%= usuario.mail %>
+                
 
-                                </div>
-                            <%end %>
-                        <% else %>
-                            <p>No tiene lecturas.</p>
-                        <% end %>    
-
+                            </li>
+                        <% end %>
+                        </ul>
+                    <% else %>
+                        <p>No se encontraron usuarios.</p>
+                    <% end %>
+                    
                     </div>
 
                 </div>
