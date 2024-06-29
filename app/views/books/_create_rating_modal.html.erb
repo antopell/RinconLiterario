@@ -8,10 +8,10 @@
     <div class="modal-content">
     <div class="modal-header">
     <h5 class="modal-title" id="createRatingModalLabel">Crear Calificación</h5>
-    <a href="<%= reset_rating_path%>" class="btn-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></a>
+    <a href="<%= reset_rating_path %>" class="btn-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></a>
     </div>
     <div class="modal-body">
-        <%= form_with(model: Review, url: create_review_path, local: true) do |form| %>
+        <%= form_with(model: Review, url: create_rating_path, local: true) do |form| %>
           <div class="espaciado">
           <% 1.upto(5) do |value| %>
             <label for="star_<%= value %>" class="form-check-label">

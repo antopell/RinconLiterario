@@ -8,6 +8,7 @@ class Lectura < ApplicationRecord
     validates :lecture_state, presence: true
     validates :reading_start_date, presence: false
     validates :reading_end_date, presence: false
+    validates :total_pages, presence: true
 
 end
 
