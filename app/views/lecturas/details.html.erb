@@ -208,7 +208,7 @@
                                                         <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura: </p> <span><p><%= @lectura.reading_end_date %></p></span>
                                                     <% end %>
                                                     <p class="h6 mb-0 font-weight-bold text-gray-800">Total de páginas: </p> <span><p><%= @lectura.total_pages %></p></span>
-                                                    <a target="_blank" rel="nofollow" href="<%= book_detail_path(@lectura.book_id)%>">Ver más detalles del libro &rarr;</a>
+                                                    <a target="_blank" rel="nofollow" href="<%= details_book_path(@lectura.book_id)%>">Ver más detalles del libro &rarr;</a>
                                                 </div>
                               
                                             </div>
@@ -220,7 +220,7 @@
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
                                             <h3 class="m-0 font-weight-bold text-primary">Notas</h3>
                                             <hr>
-                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
+                                            <%= link_to "", data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">

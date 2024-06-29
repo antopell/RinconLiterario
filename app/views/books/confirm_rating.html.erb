@@ -1,14 +1,15 @@
-<!-- app/views/book_details/create_rating.html.erb -->
+<!-- app/views/books/confirm_rating.html.erb -->
 
-<div class="modal fade" id="createRatingModal" tabindex="-1" aria-labelledby="createRatingModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmRatingModal" tabindex="-1" aria-labelledby="confirmRatingModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createRatingModalLabel">Crear Calificación</h5>
+        <h5 class="modal-title" id="confirmRatingModalLabel">Confirmar calificación</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
-        <p>FALTA CREAR EL FORMULARIO ACA PARA UNA NUEVA RESEÑA</p>
+        <p>¿Estás seguro que quieres calificar con <%= @rating %> estrellas?</p>
+        <p><%= @rating %></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

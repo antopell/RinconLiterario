@@ -219,8 +219,11 @@
                                                         <% end %></p></span>
                                                     <% if @book['saleInfo']['listPrice'].present? %>
                                                         <div class="h6 mb-0 font-weight-bold text-gray-800">Precio:</div> <span><p>
-                                                            <%= @book['saleInfo']['listPrice']['amount'] %> <%= @book['saleInfo']['listPrice']['currencyCode'] %></p></span>
-                                                    <% else %>      
+                                                            <%= @book['saleInfo']['listPrice']['amount'] %> <%= @book['saleInfo']['listPrice']['currencyCode'] %></p></span>    
+                                                    <% end %>
+                                                    <% if @book['volumeInfo']['pageCount'].present? %>
+                                                        <div class="h6 mb-0 font-weight-bold text-gray-800">Total de páginas:</div> <span><p>
+                                                            <%= @book['volumeInfo']['pageCount'] %> páginas
                                                     <% end %>
                                                     <p class="h6 mb-0 font-weight-bold text-gray-800">Calificar</p> 
                                                     <div style="display: inline-flex;">
@@ -261,39 +264,46 @@
                                             <% end %>
                                         </div>
                                         <div class="card-body">
-                                            <div class="text-center">
+                                            <div class="text-center mb-3">
+                                                <% if @ratings.present?%>
                                                 <div style="align-content: center;">
                                                     <div style="display: inline-flex;">
                                                         <% 1.upto(5) do |i| %>
                                                                 <i class="fa-regular fa-star"></i>
                                                             <% end %>
-                                                        <p class="h6 mb-0 font-weight-bold text-gray-800 ml-2">5800 reviews</p> 
+                                                        <p class="h6 mb-0 font-weight-bold text-gray-800 ml-2"><%= @ratings.size %> reviews</p> 
                                                     </div>
                                                 </div>
                                                 <!-- Divider -->
                                                 <hr class="sidebar-divider">
                                                 
-                                                <!-- Tarjetas de reviews -->
-                                                <div class="card shadow h-100 py-2 mb-2">
-                                                    <div class="card-body">
-                                                        <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
-                                                                <div class="h5 font-weight-bold text-primary text-uppercase mb-1">
-                                                                    Jonas Sousa</div>
-                                                                <div class="text-s mb-0 text-gray-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu tempus nisl. Maecenas sit amet nulla ut ligula maximus finibus malesuada vel augue. Nullam ultrices sapien non mattis auctor. Aenean feugiat lectus nisi, eget congue velit hendrerit eget. Pellentesque ornare tellus et accumsan congue. Phasellus luctus urna non lobortis faucibus. Duis mollis, orci in elementum egestas, est risus sodales urna, eget lobortis erat urna a nisl. Mauris aliquet eros diam, non posuere felis ornare sed. Pellentesque risus lorem, blandit non est ac, aliquam dapibus justo. Etiam sed purus maximus, laoreet leo quis, porttitor magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sodales libero nec auctor bibendum.</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div style="display: inline-flex;">
-                                                                    <% 1.upto(5) do |i| %>
-                                                                            <i class="fa-regular fa-star"></i>
-                                                                        <% end %>
+                                                        <!-- Tarjetas de reviews -->
+                                                        <div class="card shadow h-100 py-2 mb-2">
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                <% @ratings.each do |rating| %>
+                                                                    <div class="col mr-2">
+                                                                        <div class="h5 font-weight-bold text-primary text-uppercase mb-1">
+                                                                            <%= rating.usuario_id %> </div>
+                                                                        <div class="text-s mb-0 text-gray-800"><%= rating.comentario %></p>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div style="display: inline-flex;">
+                                                                            <% 1.upto(rating.puntuacion) do |i| %>
+                                                                                    <i class="fa-regular fa-star"></i>
+                                                                                <% end %>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr class="sidebar-divider">
+                                                                    <% end %>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    
+                                                <% else %>
+                                                    No hay reviews
+                                                <% end %>
                                             </div>
-                                            <a target="_blank" rel="nofollow" href="">Ver todas las reseñas del libro &rarr;</a>
                                         </div>
                                     </div>
                         <% else %>
@@ -325,10 +335,10 @@
 
 
     
-    <!-- Modal Rating estrellas 
-    <%= render 'book_details/confirm_rating' %>-->
+    <!-- Modal Rating estrellas -->
+    <%= render 'books/confirm_rating' %>
     <!-- Modal crear reseña -->
-    <%= render partial: 'reviews/create_rating_modal', locals: {book_id: @book['id']}%>
+    <%= render partial: 'books/create_rating_modal', locals: {book_id: @book['id']}%>
     <!-- Modal Agregar libro -->
     <%= render 'lecturas/new' %>
 
