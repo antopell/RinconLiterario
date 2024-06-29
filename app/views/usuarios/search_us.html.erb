@@ -109,14 +109,15 @@
                     <!-- Topbar Search -->
                     <%= form_with url: users_search_path, method: :get, local: true do %>
                         <div class="input-group">
-                            <input type="text" name="query" class= "form-control bg-light border-0 small" placeholder="Buscar usuarioss">
+                            <input type="text" name="query" class= "form-control bg-light border-0 small" placeholder="Buscar usuarios...">
                             <div class="input-group-append">
                                 <%= submit_tag "Buscar", class: "btn btn-primary" %>
                             </div>
                         </div>
                     <% end %>
                     
-
+                    <a class="btn btn-primary" href="<%=book_search_path%>">Buscar títulos</a>
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
