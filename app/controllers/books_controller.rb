@@ -56,7 +56,11 @@ class BooksController < ApplicationController
     def details
       api_service = ExternalApiService.new()
       @book = api_service.fetch_volume_by_id2(params)
-      @ratings = Review.where(libro_id: params[:id]).order("created_at DESC")
+      @all_ratings = Review.where(libro_id: params[:id]).order("created_at DESC")
+      if (!@all_ratings.empty?)
+        @promedio = @all_ratings.average(:puntuacion).ceil
+        @ratings = @all_ratings.limit(3)
+      end
       puts @ratings
       @rating = @@rating
       # resetea para que si vuelve a entrar no abra el modal directo
