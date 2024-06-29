@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
     def reviews
-        @reviews = Review.all
+        @reviews = Review.all.order(created_at: :desc)
     end
 
     def create
