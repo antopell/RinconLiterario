@@ -284,7 +284,10 @@
                                                                 <% @ratings.each do |rating| %>
                                                                     <div class="col mr-2">
                                                                         <div class="h5 font-weight-bold text-primary text-uppercase mb-1">
-                                                                            <%= rating.usuario_id %> </div>
+                                                                            <% usuario = Usuario.find(rating.usuario_id) %> 
+                                                                            <%="#{usuario.username}"%>
+                                                                            <% if usuario.nombre && usuario.apellido %> <%="- #{usuario.nombre} #{usuario.apellido}"%> </div><% end %>
+                                                                            
                                                                         <div class="text-s mb-0 text-gray-800"><%= rating.comentario %></p>
                                                                     </div>
                                                                     <div class="col-auto">

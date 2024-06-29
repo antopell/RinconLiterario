@@ -35,7 +35,7 @@ class LogsLecturasController < ApplicationController
     def destroy
         @logLectura = LogsLecturas.find(params[:id])
         @logLectura.destroy
-        flash[:danger] = "El log de lectura fue exitosamente eliminado"
+        flash[:success] = "El log de lectura fue exitosamente eliminado"
         redirect_to details_lectura_path(session[:lecture_id])
     end
 
