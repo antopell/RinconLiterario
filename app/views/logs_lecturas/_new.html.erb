@@ -1,19 +1,20 @@
-<!-- app/views/notas/new.html.erb -->
+<!-- app/views/logs_lecturas/new.html.erb -->
 
-<div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+<div class="modal fade" id="addLogLecturaModal" tabindex="-1" aria-labelledby="addLogLecturaModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addNoteModalLabel">Crear nueva nota</h5>
+        <h5 class="modal-title" id="addLogLecturaModalLabel">Crear nuevo log de lectura</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <%= form_with(model: @nota, scope: "nota", url:notas_path, local:true) do |f|%>
+      <%= form_with(model: @logLectura, scope: "log_lectura", url:logs_lecturas_path, local:true) do |f|%>
         <div class="modal-body">
-          <%= f.text_area :note, class: "form-control bg-light border-0 small", placeholder: "Ingresar nueva nota..." %>
+          <%= f.number_field :last_read_page , class: "form-control bg-light border-0 small" , placeholder: "Ingresar la última hoja leída del libro..." %>
           <%= f.hidden_field :lecture_id, value: @lectura.id %>
+          <%= f.hidden_field :username, value: current_user.username %>
         </div>
         <div class="modal-footer">
-          <%= f.submit "Agregar nueva nota",:class=> "btn btn-secondary" %>
+          <%= f.submit "Agregar log de lectura",:class=> "btn btn-secondary" %>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         </div>
       <% end %>

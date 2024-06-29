@@ -1,0 +1,2 @@
+class LogsLecturas < ApplicationRecord
+end

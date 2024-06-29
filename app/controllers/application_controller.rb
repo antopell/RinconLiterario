@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
 
     def current_user
         @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
+        rescue ActiveRecord::RecordNotFound
+          session[:usuario_id] = nil
+          redirect_to log_in_path, alert: "Por favor, inicia sesión."
     end
 
     def logged_in?
