@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 
   def logOut
     session.delete(:usuario_id)
+    session[:usuario_id] = nil
     redirect_to library_path
   end
 end

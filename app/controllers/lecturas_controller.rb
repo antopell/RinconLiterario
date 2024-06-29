@@ -9,7 +9,7 @@ class LecturasController < ApplicationController
     end
 
     def library
-        if (logged_in?)
+        if current_user && logged_in?
             @lecturas = Lectura.where(username: current_user.username)
         else
             @lecturas = []
@@ -32,6 +32,7 @@ class LecturasController < ApplicationController
         @lectura.username = current_user.username
         @lectura.book_id = session[:book_id]
         @lectura.book_title = session[:book_title]
+        @lectura.total_pages = session[:total_pages]
         @book_img = session[:book_img]
         if (@lectura.save)
             flash[:success] = "Se guardó la lectura exitosamente"
@@ -43,7 +44,7 @@ class LecturasController < ApplicationController
     end
 
     def lectura_params
-        params.require(:lectura).permit(:username, :book_id, :book_title, :book_img, :lecture_state, :reading_start_date, :reading_end_date)
+        params.require(:lectura).permit(:username, :book_id, :book_title, :book_img, :lecture_state, :reading_start_date, :reading_end_date, :total_pages)
     end
 
     def destroy
@@ -55,7 +56,9 @@ class LecturasController < ApplicationController
 
     def details
         @lectura = Lectura.find(params[:id])
-        @notas = Nota.where(lecture_id: params[:id])
+        @notas = Nota.where(lecture_id: params[:id]).order("created_at DESC")
+        @logs_lectura = LogsLecturas.where(lecture_id: params[:id]).order("created_at DESC")
+        @ultimo_log = @logs_lectura.first
         session[:lecture_id] = params[:id] #ver de sacar esto de aca dsp
     end
 

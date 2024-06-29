@@ -207,21 +207,20 @@
                                                     <% if @lectura.reading_end_date.present? %>
                                                         <p class="h6 mb-0 font-weight-bold text-gray-800">Fecha de fin de lectura: </p> <span><p><%= @lectura.reading_end_date %></p></span>
                                                     <% end %>
-                                                    <a target="_blank" rel="nofollow" href="<%= book_detail_path(@lectura.book_id)%>">Ver más detalles del libro &rarr;</a>
+                                                    <p class="h6 mb-0 font-weight-bold text-gray-800">Total de páginas: </p> <span><p><%= @lectura.total_pages %></p></span>
+                                                    <a target="_blank" rel="nofollow" href="<%= details_book_path(@lectura.book_id)%>">Ver más detalles del libro &rarr;</a>
                                                 </div>
                               
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <!-- Item Reviews -->
+                                    <!-- Item notas -->
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3" style="display: -webkit-inline-box;">
-                                            <h3 class="m-0 font-weight-bold text-primary">Notas</h6>
+                                            <h3 class="m-0 font-weight-bold text-primary">Notas</h3>
                                             <hr>
-                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
+                                            <%= link_to "", data: { bs_toggle: "modal", bs_target: "#addNoteModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar nota<i class="fa-solid fa-note-sticky ml-2"></i></button><% end %>
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
@@ -231,14 +230,12 @@
                                                     <div class="card-body row no-gutters align-items-center">
                                                         <% if @notas.present?%>
                                                             <% @notas.each do |nota| %>
-                                                                <div class="col md-4">
-                                                                    <% if nota.note.length > 200 %>
-                                                                        <%= truncate nota.note, length: 200 %>
-                                                                        <%= link_to 'Leer más' %>
-                                                                    <% else %>
-                                                                        <%= nota.note %>
-                                                                    <% end %>
-                                                                    <div class="text-s mb-0 text-gray-800">Fecha: <%= nota.created_at.to_date %></p>
+                                                                <div class="col-lg-5 m-3" style="border-style: outset;">
+                                                                        <p class="h6 m-2 text-gray-800"><%= nota.note %></p>
+                                                        
+                                                                    <div class="text-s mb-0 text-gray-800">
+                                                                        <p>Fecha: <%= nota.created_at.to_date %></p>
+                                                                    </div>
                                                                     <%= link_to nota_path(nota), method: :delete, data: { confirm: "¿Estás seguro que querés eliminar la nota?"}, class: "dropdown-item" do %>
                                                                         Eliminar nota <i class="fa-solid fa-trash ml-2"></i> 
                                                                     <% end %>
@@ -251,12 +248,51 @@
                                                             <%end %>
                                                         <% else %>
                                                             <p>No tiene notas.</p>
-                                                        <% end %> 
-                                                    </div>
+                                                        <% end %>
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <!-- Item Log lectura -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3" style="display: -webkit-inline-box;">
+                                            <h3 class="m-0 font-weight-bold text-primary">Logs de lectura</h3>
+                                            <hr>
+                                            <%= link_to create_rating_path(1), data: { bs_toggle: "modal", bs_target: "#addLogLecturaModal" }, class: "mr-2 btn btn-link", style: "padding: 0; border: none;" do %><button class="btn btn-secondary ml-2" type="button" data-dismiss="modal">Agregar Log de lectura<i class="fa-solid fa-glasses ml-2"></i></button><% end %>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                
+                                                <!-- Items de logs -->
+                                                <div class="card shadow h-100 py-2 mb-2">
+                                                    <div class="card-body align-items-center">
+                                                        <% if @logs_lectura.present?%>
+                                                            <% if @ultimo_log.present?%>
+                                                                <p class="h6 m-2 text-gray-800">Progreso de lectura: </p><span><p><%= @ultimo_log.last_read_page %> / <%= @lectura.total_pages %> hojas</p></span>
+                                                            <%end %>
+                                                            <% @logs_lectura.each do |log| %>
+                                                                <div class="row align-items-center m-3" style="border-style: outset; place-content: center; display: inline-block;">
+                                                                    <p class="h6 m-2 text-gray-800">Última hoja leída: </p>
+                                                                    <p class="mt-2"><%= log.last_read_page %></p>
+                                                                    <p class="h6 m-2 text-gray-800">Fecha: </p>
+                                                                    <p class="mt-2"><%= log.created_at.to_date %></p>
+                                                                    <%= link_to logs_lectura_path(log), method: :delete, data: { confirm: "¿Estás seguro que querés eliminar el log de lectura?"}, class: "dropdown-item" do %>
+                                                                        Eliminar Log de lectura <i class="fa-solid fa-trash ml-2"></i> 
+                                                                    <% end %>
+                                                                </div>
+                                                            <% end %>
+                                                        <% else %>
+                                                            <p>No tiene Logs de lecturas.</p>
+                                                        <% end %>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <% else %>
                             <p>No se encontraron libros.</p>
                         <% end %>
@@ -290,6 +326,8 @@
     <%= render 'lecturas/update' %>
     <!-- Modal Agregar libro -->
     <%= render 'notas/new' %>
+    <!-- Modal Agregar log lectura -->
+    <%= render 'logs_lecturas/new' %>
 
 
     <!-- Scroll to Top Button-->
