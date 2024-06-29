@@ -136,11 +136,11 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="profile">
+                            <a class="dropdown-item" href="<%= profile_path%>">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
-                            <a class="dropdown-item" href="edit_user">
+                            <a class="dropdown-item" href="<%= edit_user_path%>">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
@@ -253,32 +253,27 @@
               <%end%> 
                 <div class="review-list color-reviews py-3">
                 <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
-                <div class="review-item">
-                    <div class="review-info text-gray-700">
-                        <p>Título de libro</p>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="text-gray-500">Descripción de la reseña.</p>
-                    </div>
-                </div>
-                <div class="review-item">
-                    <div class="review-info text-gray-700">
-                        <p>Título de libro</p>
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="text-gray-500">Descripción de la reseña.</p>
-                    </div>
-                </div>
+                <% if @reviews.present?%>
+                      <% @reviews.each do |review| %>
+                        <div>
+                          <div class="review-info">
+                            <p class="font-weight-bold"><%= review.titulo_libro %></p>
+                            <div class="stars">
+                              <% 1.upto(5) do |value| %>
+                                  <% if value <= review.puntuacion %>
+                                      <i class="fa-solid fa-star text-success margin-top"></i>
+                                  <% else %>
+                                      <i class="fa-regular fa-star text-success margin-top"></i>
+                                  <% end %>
+                              <% end %>
+                            </div>
+                            <p class="text-gray-700 review-texto"><%= review.comentario %></p>
+                          </div>
+                      </div>   
+                    <%end %>
+                <% else %>
+                    <p>No tiene reviews.</p>
+                <% end %>
               </div>
             </div>
           </div>

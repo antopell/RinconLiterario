@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get 'library', to: 'lecturas#library'
   get 'lecture_search', to: 'lecturas#search'
   get 'book_search', to: 'books#search'
-  get 'confirm_rating', to: 'books#confirm_rating', as: 'confirm_rating'
+
+  get 'review_search', to: 'reviews#search', as: 'reviews_search'
   get 'create_rating', to: 'books#create_rating', as: 'create_rating'
   post 'create_rating', to: 'reviews#create', as: 'create_review'
   get 'reset_rating', to: 'books#reset_rating', as: 'reset_rating'

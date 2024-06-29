@@ -29,7 +29,7 @@ class UsuariosController < ApplicationController
 
   def profile
     @lecturas = @usuario.lecturas.order(reading_end_date: :desc).limit(3) # Los últimos 3 libros leídos
-    
+    @reviews = @usuario.reviews.order(created_at: :desc).limit(3)
   end
   
   
