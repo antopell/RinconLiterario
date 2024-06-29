@@ -199,9 +199,14 @@
 }
 .review-info {
     flex: 1;
+    border-bottom: #ccc solid 1px;
+    margin-top: .5em;
 }
 .review-info .stars {
     display: flex;
+}
+.review-texto {
+    margin-top: .5em;
 }
 .stars i {
     color: #f39c12;

@@ -255,9 +255,9 @@
                 <h5 class="font-weight-bold title-reviews">Últimas reseñas</h5>
                 <% if @reviews.present?%>
                       <% @reviews.each do |review| %>
-                        <div class="review-item text-gray-700">
+                        <div>
                           <div class="review-info">
-                            <p><= review.titulo_libro %></p>
+                            <p class="font-weight-bold"><%= review.titulo_libro %></p>
                             <div class="stars">
                               <% 1.upto(5) do |value| %>
                                   <% if value <= review.puntuacion %>
@@ -267,7 +267,7 @@
                                   <% end %>
                               <% end %>
                             </div>
-                            <p class="text-gray-500"><= review.comentario %></p>
+                            <p class="text-gray-700 review-texto"><%= review.comentario %></p>
                           </div>
                       </div>   
                     <%end %>
