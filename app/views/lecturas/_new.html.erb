@@ -19,6 +19,7 @@
               <%= f.hidden_field :book_title, value: session[:book_title] %>
               <%= f.hidden_field :book_id, value: session[:book_id] %>
               <%= f.hidden_field :book_img, value: session[:book_img] %>
+              <%= f.hidden_field :total_pages, value: session[:total_pages] %>
         </div>
         <div class="modal-footer">
           <%= f.submit "Agregar nueva lectura",:class=> "btn btn-secondary" %>
