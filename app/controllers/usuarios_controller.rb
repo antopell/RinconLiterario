@@ -11,10 +11,8 @@ class UsuariosController < ApplicationController
     if (@usuario.save)
       session[:usuario_id] = @usuario.id
       redirect_to library_path
-      # render json: usuario, status: :created;
     else 
       redirect_to :signIn, alert: "El usuario no se pudo crear"
-      # render json: {errors: usuario.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
